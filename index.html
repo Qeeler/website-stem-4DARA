@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknologi Hijau & Alam Sekitar</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #eefdf3;
+            color: #1b4332;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: white;
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .header-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .main-content {
+            padding: 25px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d6a4f;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .toggle-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #40916c, #2d6a4f);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .toggle-btn:active {
+            transform: scale(0.98);
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            background-color: #f8faf9;
+            border-radius: 12px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .fun-fact {
+            margin: 20px;
+            padding: 15px;
+            background-color: #d8f3dc;
+            border-radius: 15px;
+            border-left: 8px solid #52b788;
+        }
+
+        .fun-fact h3 {
+            margin-top: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-tukar {
+            background-color: #52b788;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Lampu Hijau" class="header-img">
+        
+        <div class="main-content">
+            <h1>🌿 Teknologi Hijau Memacu Alam Sekitar</h1>
+            
+            <button class="toggle-btn" onclick="toggleContent()">✨ Klik Untuk Teroka!</button>
+            
+            <div id="infoBox" class="content">
+                <p><strong>Kenapa Kita Perlu Teknologi Hijau?</strong></p>
+                <p>Ia membantu kita hidup lebih selesa tanpa merosakkan bumi yang kita cintai ni.</p>
+                
+                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Panel Solar">
+                
+                <p>Contohnya, penggunaan <strong>Panel Solar</strong> dan <strong>Kereta Elektrik</strong> yang mengurangkan pencemaran udara.</p>
+            </div>
+        </div>
+
+        <div class="fun-fact">
+            <h3>💡 Fun Fact!</h3>
+            <p id="factText">Tahukah anda? Satu pokok matang boleh menyerap kira-kira 22kg karbon dioksida dalam setahun!</p>
+            <button class="btn-tukar" onclick="tukarFact()">Tukar Fakta ⚡️</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent() {
+            var content = document.getElementById("infoBox");
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            }
+            else {
+                content.style.display = "block";
+            }
+        }
+
+        const facts = [
+            "Tahukah anda? Satu pokok matang boleh menyerap kira-kira 22kg karbon dioksida dalam setahun!",
+            "Tenaga suria adalah sumber tenaga yang paling banyak di bumi. Cahaya matahari sejam cukup untuk tenaga dunia setahun!",
+            "Mengitar semula satu tin aluminium jimat tenaga yang cukup untuk tengok TV selama 3 jam!",
+            "Basikal adalah pengangkutan paling hijau di dunia! Jom kayuh!"
+        ];
+
+        function tukarFact() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById("factText").innerText = randomFact;
+        }
+    </script>
+
+</body>
+</html>
