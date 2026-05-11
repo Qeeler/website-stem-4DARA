@@ -313,16 +313,28 @@
         const qLabel = document.getElementById('q-img-label');
         const qFallback = document.getElementById('q-fallback');
         
+        // Reset paparan sebelum load gambar baru
+        qImg.style.display = 'none';
+        qLabel.style.display = 'none';
+        qFallback.style.display = 'none';
+
         if(q.img && q.img !== "") {
+            // Cuba panggil gambar
             qImg.src = q.img;
             qImg.style.display = 'block';
+            
+            // Set label
             qLabel.innerText = q.label || "VISUAL SOALAN";
             qLabel.style.display = 'block';
-            qFallback.style.display = 'none';
+
+            // Kalau gambar tu error (tak jumpa), baru tunjuk Oyen
+            qImg.onerror = function() {
+                this.style.display = 'none';
+                qLabel.style.display = 'none';
+                qFallback.style.display = 'flex';
+            };
         } else {
-            qImg.src = "";
-            qImg.style.display = 'none';
-            qLabel.style.display = 'none';
+            // Kalau memang soalan tu tak ada gambar (img: ""), tunjuk Oyen terus
             qFallback.style.display = 'flex';
         }
 
