@@ -392,18 +392,6 @@
             else document.getElementById('oyenMain').innerText = "😿";
         }
     }
-
-    function nextStep() {
-        currentQ++;
-        if(currentQ < 10) renderQ();
-        else {
-            document.getElementById('score-text').innerText = `${score} / 10`;
-            navTo('s4');
-            if(score >= 8) document.getElementById('oyenMain').innerText = "👑";
-            else if(score >= 5) document.getElementById('oyenMain').innerText = "😼";
-            else document.getElementById('oyenMain').innerText = "😿";
-        }
-    }
 </script>
 </body>
 </html>
