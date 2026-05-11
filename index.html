@@ -3,157 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teknologi Hijau & Alam Sekitar</title>
+    <title>Teknologi Hijau - 4 D.A.R.A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #eefdf3;
-            color: #1b4332;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            margin: 0;
+        :root {
+            --primary: #1b5e20;
+            --secondary: #2ecc71;
+            --dark: #052e16;
+            --light: #f8fafc;
         }
 
-        .container {
-            max-width: 650px;
-            width: 100%;
-            background: white;
-            padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin-top: 20px;
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; margin: 0; color: #1e293b; line-height: 1.8; }
+
+        /* HEADER */
+        .header-bar {
+            position: fixed; top: 0; width: 100%; height: 80px; background: var(--dark);
+            color: white; display: flex; align-items: center; padding: 0 30px; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3); box-sizing: border-box;
         }
 
-        .header-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+        .hamburger { font-size: 32px; cursor: pointer; background: none; border: none; color: white; margin-right: 20px; }
+        .brand-logo { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: var(--secondary); letter-spacing: 1px; }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed; left: -320px; top: 0; width: 300px; height: 100vh;
+            background: var(--dark); color: white; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001; padding: 80px 25px 30px; display: flex; flex-direction: column; box-sizing: border-box;
+        }
+        .sidebar.active { left: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px); display: none; z-index: 999; }
+        .overlay.active { display: block; }
+
+        .nav-link {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: white; padding: 15px; text-align: left; width: 100%; margin-bottom: 12px;
+            border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active-link { background: var(--primary); color: var(--secondary); transform: translateX(10px); }
+
+        /* SIDEBAR FOOTER */
+        .sidebar-footer { margin-top: auto; padding-top: 15px; }
+        .credits-box { margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .credits-box h4 { margin: 0 0 10px 0; font-size: 0.85rem; color: var(--secondary); text-transform: uppercase; }
+        .credits-list { list-style: none; padding: 0; margin: 0; font-size: 0.8rem; color: #cbd5e1; }
+        .credits-list li { margin-bottom: 5px; border-left: 2px solid var(--secondary); padding-left: 10px; }
+        .contact-info { font-size: 0.75rem; color: #94a3b8; margin-top: 15px; line-height: 1.5; }
+        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; margin-top: 15px; }
+
+        /* CONTENT */
+        .main-wrapper { margin-top: 100px; padding: 20px; display: flex; justify-content: center; }
+        .content-container { width: 100%; max-width: 900px; background: white; border-radius: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden; padding: 50px; box-sizing: border-box; }
+
+        .screen { display: none; animation: slideUp 0.6s ease-out forwards; }
+        .screen.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* IMAGE SYSTEM WITH LABEL */
+        .img-container { margin-bottom: 30px; text-align: center; background: #f1f5f9; border-radius: 20px; padding: 10px; border: 1px solid #e2e8f0; position: relative; }
+        .img-container img { max-width: 100%; height: auto; border-radius: 15px; display: block; margin: 0 auto; max-height: 300px; }
+        .img-label { display: block; margin-top: 10px; font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .img-fallback { padding: 40px 20px; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .img-fallback span { font-size: 60px; display: block; }
+
+        h1 { font-family: 'Space Grotesk'; font-size: 2.6rem; color: var(--dark); margin-top: 0; }
+        .pro-card { background: #f8fafc; border-left: 12px solid var(--primary); padding: 35px; margin-bottom: 35px; border-radius: 20px; }
+        .pro-card h3 { color: var(--primary); margin-top: 0; font-size: 1.7rem; font-family: 'Space Grotesk'; }
+        
+        .btn-mega {
+            background: var(--primary); color: white; border: none; padding: 25px;
+            border-radius: 60px; font-size: 1.4rem; font-weight: 900; cursor: pointer;
+            width: 100%; margin-top: 20px; box-shadow: 0 8px 0 var(--dark); transition: 0.2s;
         }
 
-        .main-content {
-            padding: 25px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2d6a4f;
-            margin-top: 0;
-            font-size: 24px;
-        }
-
-        .toggle-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #40916c, #2d6a4f);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: transform 0.2s;
-        }
-
-        .toggle-btn:active {
-            transform: scale(0.98);
-        }
-
-        .content {
-            display: none;
-            padding: 20px;
-            background-color: #f8faf9;
-            border-radius: 12px;
-            margin-top: 15px;
-            line-height: 1.6;
-        }
-
-        .content img {
-            width: 100%;
-            border-radius: 10px;
-            margin: 10px 0;
-        }
-
-        .fun-fact {
-            margin: 20px;
-            padding: 15px;
-            background-color: #d8f3dc;
-            border-radius: 15px;
-            border-left: 8px solid #52b788;
-        }
-
-        .fun-fact h3 {
-            margin-top: 0;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-tukar {
-            background-color: #52b788;
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-top: 10px;
-        }
+        .hint-zone { position: fixed; bottom: 40px; right: 40px; z-index: 100; text-align: right; }
+        .bubble { background: white; border: 3px solid var(--primary); padding: 20px; border-radius: 25px; width: 240px; margin-bottom: 15px; display: none; box-shadow: 0 15px 40px rgba(0,0,0,0.2); font-weight: 700; position: relative; }
+        .bubble::after { content: ''; position: absolute; bottom: -15px; right: 30px; border-width: 15px 15px 0; border-style: solid; border-color: white transparent; }
+        .oyen-face { font-size: 75px; cursor: pointer; transition: 0.3s; display: inline-block; }
+        .oyen-face:hover { transform: scale(1.1) rotate(5deg); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Lampu Hijau" class="header-img">
-        
-        <div class="main-content">
-            <h1>🌿 Teknologi Hijau Memacu Alam Sekitar</h1>
-            
-            <button class="toggle-btn" onclick="toggleContent()">✨ Klik Untuk Teroka!</button>
-            
-            <div id="infoBox" class="content">
-                <p><strong>Kenapa Kita Perlu Teknologi Hijau?</strong></p>
-                <p>Ia membantu kita hidup lebih selesa tanpa merosakkan bumi yang kita cintai ni.</p>
-                
-                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Panel Solar">
-                
-                <p>Contohnya, penggunaan <strong>Panel Solar</strong> dan <strong>Kereta Elektrik</strong> yang mengurangkan pencemaran udara.</p>
-            </div>
-        </div>
+    <header class="header-bar">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <div class="brand-logo">4 D.A.R.A • TEKNOLOGI HIJAU</div>
+    </header>
 
-        <div class="fun-fact">
-            <h3>💡 Fun Fact!</h3>
-            <p id="factText">Tahukah anda? Satu pokok matang boleh menyerap kira-kira 22kg karbon dioksida dalam setahun!</p>
-            <button class="btn-tukar" onclick="tukarFact()">Tukar Fakta ⚡️</button>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <nav class="sidebar" id="sidebar">
+        <button class="nav-link active-link" onclick="navTo('s1', this)">🏠 Profil Kumpulan</button>
+        <button class="nav-link" onclick="navTo('s2', this)">📖 Modul Pembelajaran</button>
+        
+        <div class="sidebar-footer">
+            <div class="credits-box">
+                <h4>Kredit Pasukan</h4>
+                <ul class="credits-list">
+                    <li>Danish (Leader & Design)</li>
+                    <li>Aisy (Creative Designer)</li>
+                    <li>Raja (Technical Assistant)</li>
+                    <li>Aqeel (Lead Software Dev)</li>
+                </ul>
+            </div>
+            <strong style="color:var(--secondary); font-size: 0.8rem;">HUBUNGI KAMI:</strong>
+            <div class="contact-info">
+                📞 +6011 1581 1246<br>
+                📧 m-11995403@moe-dl.edu.my<br>
+                📍 [ALAMAT DI SINI]
+            </div>
+            <div class="copyright">&copy; 2026 Kumpulan 4 D.A.R.A.</div>
         </div>
+    </nav>
+
+    <div class="hint-zone" id="hintZone" style="display: none;">
+        <div class="bubble" id="hintBubble"></div>
+        <div class="oyen-face" id="oyenMain" onclick="showHint()">😺</div>
     </div>
 
-    <script>
-        function toggleContent() {
-            var content = document.getElementById("infoBox");
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            }
-            else {
-                content.style.display = "block";
-            }
+    <main class="main-wrapper">
+        <div class="content-container">
+            
+            <div id="s1" class="screen active">
+                <h1>Profil Strategik Kumpulan</h1>
+                <div class="img-container">
+                    <img src="4DARA.png" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
+                    <span class="img-label">KUMPULAN 4 D.A.R.A (3 ASK)</span>
+                    <div class="img-fallback"><span>😺</span><p><b>Oyen: Fail 4DARA.png tidak ditemui</b></p></div>
+                </div>
+                <div class="pro-card">
+                    <h3>Visi 4 D.A.R.A.</h3>
+                    <p>Kami merupakan barisan penyelidik muda dari <b>SMK Bandar Tun Hussein Onn 2</b> yang berdedikasi tinggi dalam mengintegrasikan kepakaran pengaturcaraan Asas Sains Komputer dengan penyelesaian alam sekitar secara holistik. Kumpulan 4 D.A.R.A terdiri daripada <b>Danish, Aisy, Raja, dan Aqeel</b>.</p>
+                    <p>Matlamat kami adalah untuk membangunkan satu kerangka digital yang mampu mengedukasi masyarakat tentang potensi besar Teknologi Hijau. Kami percaya bahawa melalui kefahaman yang mendalam terhadap pemprosesan sisa organik dan tenaga boleh baharu, kita mampu mengurangkan jejak karbon secara drastik demi kelestarian generasi masa hadapan.</p>
+                </div>
+            </div>
+
+            <div id="s2" class="screen">
+                <h1>Modul Teknologi Hijau</h1>
+                
+                <div class="pro-card">
+                    <h3>1. Analisis Gas Metana (CH4)</h3>
+                    <div class="img-container">
+                        <img src="metana.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
+                        <span class="img-label">RAJAH 1.1: KITARAN GAS METANA</span>
+                        <div class="img-fallback"><span>😺</span></div>
+                    </div>
+                    <p>Gas Metana merupakan salah satu gas rumah hijau yang paling kritikal di dunia hari ini. Ia terhasil daripada aktiviti penguraian bahan organik (seperti sisa makanan, sisa pertanian, dan najis ternakan) oleh mikroorganisma dalam keadaan <b>anaerobik</b> (tanpa bekalan oksigen). Di tapak pelupusan sampah, pengumpulan sisa organik yang tidak terkawal menjadi punca utama pembebasan metana secara besar-besaran ke atmosfera.</p>
+                    <p>Metana mempunyai keupayaan untuk memerangkap haba 28 kali lebih kuat berbanding Karbon Dioksida (CO2). Solusi yang kami cadangkan adalah pembinaan loji <b>Biogas Digestor</b> yang mampu menangkap gas ini sebelum ia terbebas, lalu menukarkannya kepada sumber bahan api hijau untuk kegunaan domestik dan industri.</p>
+                </div>
+
+                <div class="pro-card">
+                    <h3>2. Ekosistem Hidrogen Hijau</h3>
+                    <div class="img-container">
+                        <img src="hidrogen.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
+                        <span class="img-label">RAJAH 2.1: PROSES ELEKTROLISIS AIR</span>
+                        <div class="img-fallback"><span>😺</span></div>
+                    </div>
+                    <p>Hidrogen Hijau merupakan revolusi tenaga yang paling bersih setakat ini. Ia digelar "hijau" kerana proses penghasilannya menggunakan kaedah <b>elektrolisis air</b> yang dikuasakan sepenuhnya oleh tenaga boleh baharu seperti panel solar atau kincir angin. Melalui proses ini, air (H2O) dipecahkan kepada gas oksigen (O2) dan gas hidrogen (H2) tanpa melibatkan sebarang pembakaran bahan api fosil.</p>
+                    <p>Apabila hidrogen ini digunakan dalam sel bahan api kenderaan, satu-satunya hasil sampingan yang dihasilkan adalah <b>wap air murni</b>. Ini bermakna sistem ini mencapai tahap sifar emisi (Net Zero Carbon), yang sangat kritikal bagi memulihkan lapisan ozon dan mengurangkan pencemaran udara.</p>
+                </div>
+
+                <div class="pro-card">
+                    <h3>3. Polimer Biodegradasi PHA</h3>
+                    <div class="img-container">
+                        <img src="pha.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
+                        <span class="img-label">RAJAH 3.1: STRUKTUR BIOPLASTIK PHA</span>
+                        <div class="img-fallback"><span>😺</span></div>
+                    </div>
+                    <p><b>Polyhydroxyalkanoates (PHA)</b> adalah jawapan kepada krisis plastik dunia. PHA merupakan biopolimer linear yang dihasilkan secara organik melalui penapaian bahan mentah seperti minyak sayuran atau sisa kanji oleh mikrob/bakteria. Bakteria ini menghasilkan PHA sebagai simpanan tenaga semulajadi, sama seperti manusia menyimpan lemak.</p>
+                    <p>PHA sangat istimewa kerana keupayaannya untuk <b>terurai sepenuhnya secara alami</b> di dalam tanah dan air laut dalam tempoh singkat (3 hingga 6 bulan). Ia tidak meninggalkan sisa mikroplastik toksik. Inovasi ini membolehkan kita menggantikan penggunaan plastik sekali guna tanpa menjejaskan rantaian makanan hidupan laut.</p>
+                </div>
+
+                <button class="btn-mega" onclick="startQuiz()">MULA SESI PENILAIAN ➔</button>
+            </div>
+
+            <div id="s3" class="screen">
+                <div id="q-count" style="font-weight:900; color:var(--primary); margin-bottom: 10px;"></div>
+                
+                <div class="img-container" id="q-img-box" style="margin-bottom: 20px;">
+                    <img id="q-img" src="" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
+                    <span id="q-img-label" class="img-label"></span>
+                    <div class="img-fallback" id="q-fallback"><span>😺</span><p style="font-size: 0.8rem; margin: 5px 0 0;">Visual Soalan</p></div>
+                </div>
+
+                <h2 id="q-text" style="margin:20px 0;"></h2>
+                <div id="q-opts" style="display: grid; gap: 15px;"></div>
+                <button id="next-btn" class="btn-mega" style="display:none; background:#333;" onclick="nextStep()">SOALAN BERIKUTNYA ➔</button>
+            </div>
+
+            <div id="s4" class="screen" style="text-align:center;">
+                <h1>ANALISIS PRESTASI</h1>
+                <h2 id="score-text" style="font-size:7rem; color:var(--secondary); margin:0;">0/5</h2>
+                <button class="btn-mega" onclick="navTo('s2')">ULANG KAJI MODUL</button>
+            </div>
+        </div>
+    </main>
+
+<script>
+    const bank = [
+        { q: "Siapakah Leader kumpulan 4 D.A.R.A?", a: ["Aqeel", "Danish", "Aisy", "Raja"], c: 1, h: "Dia yang jaga design dan lead team ni.", img: "4DARA.png", label: "PROFIL PASUKAN" },
+        { q: "Gas Metana mempunyai GWP berapa kali CO2?", a: ["2x", "28x", "100x", "50x"], c: 1, h: "Dua puluh lapan kali ganda!", img: "metana.jpg", label: "GAS RUMAH HIJAU" },
+        { q: "Hasil ekzos kenderaan Hidrogen Hijau?", a: ["Asap", "Wap Air (H2O)", "Minyak", "Pasir"], c: 1, h: "Sangat bersih, keluar air je.", img: "hidrogen.jpg", label: "SEL BAHAN API" },
+        { q: "PHA ialah plastik yang dihasilkan oleh?", a: ["Mesin", "Bakteria", "Kertas", "Plastik"], c: 1, h: "Organisma seni yang buat.", img: "pha.jpg", label: "BIOPLASTIK" },
+        { q: "Berapa lama PHA reput di laut?", a: ["10 tahun", "3-6 bulan", "1 minggu", "100 tahun"], c: 1, h: "Kejap je, bawah setahun dah hilang.", img: "pha.jpg", label: "KELUARAN PHA" }
+    ];
+
+    let currentQ = 0; let score = 0; let session = []; let locked = false;
+
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+
+    function navTo(id, btn) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if(btn) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-link'));
+            btn.classList.add('active-link');
+        }
+        document.getElementById('hintZone').style.display = (id === 's3') ? 'block' : 'none';
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        window.scrollTo(0,0);
+    }
+
+    function startQuiz() {
+        session = [...bank].sort(() => 0.5 - Math.random()).slice(0, 5);
+        currentQ = 0; score = 0;
+        navTo('s3');
+        renderQ();
+    }
+
+    function renderQ() {
+        locked = false;
+        const q = session[currentQ];
+        document.getElementById('oyenMain').innerText = "😺";
+        document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('q-count').innerText = `PENILAIAN: SOALAN ${currentQ + 1} / 5`;
+        document.getElementById('q-text').innerText = q.q;
+        
+        const qImg = document.getElementById('q-img');
+        const qLabel = document.getElementById('q-img-label');
+        const qFallback = document.getElementById('q-fallback');
+        
+        if(q.img && q.img !== "") {
+            qImg.src = q.img;
+            qImg.style.display = 'block';
+            qLabel.innerText = q.label || "VISUAL SOALAN";
+            qLabel.style.display = 'block';
+            qFallback.style.display = 'none';
+        } else {
+            qImg.src = "";
+            qImg.style.display = 'none';
+            qLabel.style.display = 'none';
+            qFallback.style.display = 'flex';
         }
 
-        const facts = [
-            "Tahukah anda? Satu pokok matang boleh menyerap kira-kira 22kg karbon dioksida dalam setahun!",
-            "Tenaga suria adalah sumber tenaga yang paling banyak di bumi. Cahaya matahari sejam cukup untuk tenaga dunia setahun!",
-            "Mengitar semula satu tin aluminium jimat tenaga yang cukup untuk tengok TV selama 3 jam!",
-            "Basikal adalah pengangkutan paling hijau di dunia! Jom kayuh!"
-        ];
+        const box = document.getElementById('q-opts');
+        box.innerHTML = '';
+        q.a.forEach((opt, i) => {
+            const b = document.createElement('button');
+            b.style = "background:white; border:2px solid #ddd; padding:18px; border-radius:15px; text-align:left; font-weight:700; cursor:pointer;";
+            b.innerText = opt;
+            b.onclick = () => {
+                if(locked) return;
+                locked = true;
+                if(i === q.c) { 
+                    score++; b.style.background = "#dcfce7"; b.style.borderColor = "#22c55e"; 
+                    document.getElementById('oyenMain').innerText = "😻";
+                } else { 
+                    b.style.background = "#fef2f2"; b.style.borderColor = "#ef4444"; 
+                    document.getElementById('oyenMain').innerText = "😿";
+                }
+                document.getElementById('next-btn').style.display = 'block';
+            };
+            box.appendChild(b);
+        });
+        document.getElementById('hintBubble').style.display = 'none';
+    }
 
-        function tukarFact() {
-            const randomFact = facts[Math.floor(Math.random() * facts.length)];
-            document.getElementById("factText").innerText = randomFact;
+    function showHint() {
+        const oyen = document.getElementById('oyenMain');
+        const bubble = document.getElementById('hintBubble');
+        const intro = ["Sini aku bisik...", "Oyen rasa jawapannya...", "Psst! Dengar ni...", "Jangan bagitau orang lain..."];
+        oyen.innerText = "🧐";
+        bubble.innerText = intro[Math.floor(Math.random() * intro.length)] + "\n\n" + session[currentQ].h;
+        bubble.style.display = 'block';
+    }
+
+    function nextStep() {
+        currentQ++;
+        if(currentQ < 5) renderQ();
+        else {
+            document.getElementById('score-text').innerText = `${score} / 5`;
+            navTo('s4');
+            if(score >= 4) document.getElementById('oyenMain').innerText = "👑";
+            else if(score >= 2) document.getElementById('oyenMain').innerText = "😼";
+            else document.getElementById('oyenMain').innerText = "😿";
         }
-    </script>
-
+    }
+</script>
 </body>
-</html> 
+</html>
