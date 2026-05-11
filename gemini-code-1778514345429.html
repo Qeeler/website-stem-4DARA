@@ -371,11 +371,11 @@
         bubble.innerText = intro[Math.floor(Math.random() * intro.length)] + "\n\n" + session[currentQ].h;
         bubble.style.display = 'block';
 
-        // --- AUTO HIDE SELEPAS 5 SAAT ---
+        // --- AUTO HIDE SELEPAS 3 SAAT ---
         setTimeout(() => {
             bubble.style.display = 'none';
             if(!locked) oyen.innerText = "😺"; 
-        }, 5000); 
+        }, 3000); 
     }
 
     function nextStep() {
