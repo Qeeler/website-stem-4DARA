@@ -79,8 +79,24 @@
         .hint-zone { position: fixed; bottom: 40px; right: 40px; z-index: 100; text-align: right; }
         .bubble { background: white; border: 3px solid var(--primary); padding: 20px; border-radius: 25px; width: 240px; margin-bottom: 15px; display: none; box-shadow: 0 15px 40px rgba(0,0,0,0.2); font-weight: 700; position: relative; }
         .bubble::after { content: ''; position: absolute; bottom: -15px; right: 30px; border-width: 15px 15px 0; border-style: solid; border-color: white transparent; }
-        .oyen-face { font-size: 75px; cursor: pointer; transition: 0.3s; display: inline-block; }
-        .oyen-face:hover { transform: scale(1.1) rotate(5deg); }
+        /* Oyen asal (Desktop) */
+.oyen-face { 
+    font-size: 75px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    display: inline-block; 
+}
+
+/* Oyen versi Phone (Skrin Kecil) */
+@media screen and (max-width: 600px) {
+    .oyen-face { 
+        font-size: 45px; /* Kecilkan sikit supaya tak ganggu butang */
+    }
+    .bubble {
+        width: 180px; /* Bubble dialog pun kecil sikit */
+        font-size: 0.8rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -197,15 +213,63 @@
                 <button class="btn-mega" onclick="navTo('s2')">ULANG KAJI MODUL</button>
             </div>
         </div>
-    </main>
-
-<script>
+</body>
+    <script>
     const bank = [
+        // --- SOALAN KUMPULAN (EASTER EGGS) ---
         { q: "Siapakah Leader kumpulan 4 D.A.R.A?", a: ["Aqeel", "Danish", "Aisy", "Raja"], c: 1, h: "Dia yang jaga design dan lead team ni.", img: "4DARA.png", label: "PROFIL PASUKAN" },
-        { q: "Gas Metana mempunyai GWP berapa kali CO2?", a: ["2x", "28x", "100x", "50x"], c: 1, h: "Dua puluh lapan kali ganda!", img: "metana.jpg", label: "GAS RUMAH HIJAU" },
-        { q: "Hasil ekzos kenderaan Hidrogen Hijau?", a: ["Asap", "Wap Air (H2O)", "Minyak", "Pasir"], c: 1, h: "Sangat bersih, keluar air je.", img: "hidrogen.jpg", label: "SEL BAHAN API" },
-        { q: "PHA ialah plastik yang dihasilkan oleh?", a: ["Mesin", "Bakteria", "Kertas", "Plastik"], c: 1, h: "Organisma seni yang buat.", img: "pha.jpg", label: "BIOPLASTIK" },
-        { q: "Berapa lama PHA reput di laut?", a: ["10 tahun", "3-6 bulan", "1 minggu", "100 tahun"], c: 1, h: "Kejap je, bawah setahun dah hilang.", img: "pha.jpg", label: "KELUARAN PHA" }
+        { q: "Siapakah Main Developer yang tulis kod website ni?", a: ["Danish", "Raja", "Aqeel", "Aisy"], c: 2, h: "Si Aqeel tu lah!", img: "", label: "TECH TEAM" },
+        { q: "Sekolah manakah asal kumpulan 4 D.A.R.A?", a: ["SMKBTHO1", "SMKBTHO2", "SMK Cheras", "SMK Perdana"], c: 1, h: "Bandar Tun Hussein Onn 2.", img: "", label: "LOKASI" },
+        { q: "Aisy memegang peranan sebagai apa?", a: ["Ketua", "Developer", "Designer", "Pemandu"], c: 2, h: "Creative Designer kita.", img: "", label: "PERANAN" },
+        { q: "Raja membantu dalam bahagian apa?", a: ["Technical", "Masak", "Tidur", "Lari"], c: 0, h: "Technical Assistant.", img: "", label: "PERANAN" },
+
+        // --- SOALAN METANA (CH4) ---
+        { q: "Gas Metana terhasil tanpa oksigen, dipanggil proses?", a: ["Aerobik", "Anaerobik", "Fotosintesis", "Elektrolisis"], c: 1, h: "Kawasan kedap udara.", img: "metana.jpg", label: "PROSES KIMIA" },
+        { q: "Metana adalah gas rumah hijau yang?", a: ["Lemah", "Kuat", "Wangi", "Berwarna Biru"], c: 1, h: "Lagi kuat dari CO2.", img: "metana.jpg", label: "CIRI GAS" },
+        { q: "Berapa kali ganda Metana memerangkap haba berbanding CO2?", a: ["10x", "28x", "50x", "100x"], c: 1, h: "Jawapannya dalam teks modul.", img: "metana.jpg", label: "ANALISIS" },
+        { q: "Antara berikut, mana punca utama Metana?", a: ["Ekzos kereta", "Tapak pelupusan sampah", "Kilang besi", "Asap rokok"], c: 1, h: "Sisa organik yang mereput.", img: "", label: "PUNCA EMISI" },
+        { q: "Gas Metana boleh ditukar jadi tenaga melalui?", a: ["Kincir angin", "Biogas Digestor", "Panel solar", "Bateri"], c: 1, h: "Tangkap gas tu guna loji.", img: "", label: "SOLUSI" },
+
+        // --- SOALAN HIDROGEN HIJAU ---
+        { q: "Proses memisahkan air (H2O) guna elektrik dipanggil?", a: ["Penyejatan", "Elektrolisis", "Kondensasi", "Pembakaran"], c: 1, h: "Guna elektrod.", img: "hidrogen.jpg", label: "ELEKTROLISIS" },
+        { q: "Hasil tunggal ekzos kenderaan hidrogen?", a: ["CO2", "Wap Air (H2O)", "Asap hitam", "Oksigen"], c: 1, h: "Sangat bersih.", img: "hidrogen.jpg", label: "EKZOS" },
+        { q: "Kenapa ia dipanggil Hidrogen HIJAU?", a: ["Warna gasnya hijau", "Guna tenaga boleh baharu", "Dibuat dari daun", "Guna baja"], c: 1, h: "Sebab punca elektriknya bersih.", img: "hidrogen.jpg", label: "DEFINISI" },
+        { q: "Hidrogen disimpan dalam bentuk apa dalam kereta?", a: ["Cecair/Gas termampat", "Ketul ais", "Bateri alkali", "Pasir"], c: 0, h: "Dalam tangki khas.", img: "", label: "PENYIMPANAN" },
+        { q: "Apakah alat yang menukar hidrogen jadi elektrik dalam kereta?", a: ["Enjin petrol", "Sel Bahan Api", "Radiator", "Karburator"], c: 1, h: "Fuel Cell.", img: "", label: "TEKNOLOGI" },
+
+        // --- SOALAN PHA (PLASTIK BIODEGRADASI) ---
+        { q: "Apakah maksud singkatan PHA?", a: ["Plastic High Acid", "Polyhydroxyalkanoates", "Public Health Area", "Poly Acid"], c: 1, h: "Nama kimia biopolimer.", img: "pha.jpg", label: "SAINS" },
+        { q: "PHA dihasilkan secara semulajadi oleh?", a: ["Mesin kilang", "Bakteria", "Akar pokok", "Cacing"], c: 1, h: "Mikroorganisma.", img: "pha.jpg", label: "PRODUKSI" },
+        { q: "Kelebihan utama plastik PHA?", a: ["Lagi keras dari besi", "Mudah terurai semulajadi", "Warna cantik", "Harga sangat murah"], c: 1, h: "Biodegradasi.", img: "pha.jpg", label: "KELEBIHAN" },
+        { q: "Berapa lama PHA reput dalam air laut?", a: ["100 tahun", "10 tahun", "3-6 bulan", "1 minggu"], c: 2, h: "Sangat pantas.", img: "", label: "TEMPOH" },
+        { q: "Bakteria simpan PHA sebagai apa dalam badan mereka?", a: ["Lemak/Tenaga", "Racun", "Tulang", "Air"], c: 0, h: "Simpanan tenaga.", img: "", label: "BIOLOGI" },
+
+        // --- TAMBAHAN 25 SOALAN LAGI (RAWAK) ---
+        { q: "Teknologi Hijau bertujuan untuk?", a: ["Jimat duit", "Lestarikan alam", "Nampak moden", "Banyakkan kilang"], c: 1, h: "Demi masa depan.", img: "", label: "OBJEKTIF" },
+        { q: "Antara berikut bukan tenaga boleh baharu?", a: ["Solar", "Angin", "Arang batu", "Hidro"], c: 2, h: "Fosil tidak boleh diperbaharui.", img: "", label: "TENAGA" },
+        { q: "Apa maksud Sifar Karbon?", a: ["Tiada karbon dioksida", "Karbon warna putih", "Bakar karbon", "Guna arang"], c: 0, h: "Net Zero.", img: "", label: "ISTILAH" },
+        { q: "Panel solar menukar cahaya matahari jadi?", a: ["Haba", "Air", "Elektrik", "Angin"], c: 2, h: "Tenaga fotovoltaik.", img: "", label: "SOLAR" },
+        { q: "Sisa makanan boleh diproses jadi?", a: ["Baja/Biogas", "Plastik", "Besi", "Kertas"], c: 0, h: "Kompos.", img: "", label: "SISA" },
+        { q: "Wap air hasil hidrogen selamat tak?", a: ["Beracun", "Sangat selamat", "Meletup", "Berasid"], c: 1, h: "Ia cuma air murni.", img: "", label: "KESELAMATAN" },
+        { q: "PHA dibuat daripada apa?", a: ["Minyak sayuran/Sisa kanji", "Pasir pantai", "Besi buruk", "Kayu"], c: 0, h: "Bahan organik.", img: "", label: "BAHAN" },
+        { q: "Gas rumah hijau menyebabkan?", a: ["Hujan salji", "Pemanasan global", "Gempa bumi", "Tsunami"], c: 1, h: "Suhu bumi naik.", img: "", label: "KESAN" },
+        { q: "Sistem gelung tertutup bermaksud?", a: ["Tiada pembaziran", "Bulatan hitam", "Pagar besi", "Litar pintas"], c: 0, h: "Semua dikitar semula.", img: "", label: "SISTEM" },
+        { q: "Warna yang sinonim dengan alam sekitar?", a: ["Merah", "Hijau", "Kuning", "Hitam"], c: 1, h: "Teknologi apa ni?", img: "", label: "TRIVIA" },
+        { q: "Pencemaran mikroplastik boleh dikurangi guna?", a: ["Beg plastik biasa", "Plastik PHA", "Beg kertas", "Botol kaca"], c: 1, h: "Sebab ia reput.", img: "", label: "SOLUSI" },
+        { q: "Kincir angin perlukan apa untuk pusing?", a: ["Air", "Elektrik", "Angin", "Enjin"], c: 2, h: "Tenaga kinetik udara.", img: "", label: "TENAGA" },
+        { q: "Hidrogen hijau mahal sebab apa?", a: ["Sukar jumpa air", "Kos elektrolisis tinggi", "Sebab ia hijau", "Kereta berat"], c: 1, h: "Kos teknologi baru.", img: "", label: "EKONOMI" },
+        { q: "Adakah PHA selamat untuk hidupan laut?", a: ["Tidak", "Ya", "Mungkin", "Hanya untuk ikan paus"], c: 1, h: "Sebab tiada toksik.", img: "", label: "HIDUPAN LAUT" },
+        { q: "Oyen dalam website ni kucing jenis apa?", a: ["Kucing Hitam", "Kucing Oyen (Ginger)", "Kucing Siam", "Robot"], c: 1, h: "Tengok muka dia.", img: "", label: "MASKOT" },
+        { q: "Elektrolisis perlukan dua galah besi iaitu?", a: ["Anod & Katod", "Kayu & Besi", "Sudu & Garpu", "Kiri & Kanan"], c: 0, h: "Istilah kimia.", img: "", label: "SAINS" },
+        { q: "Metana boleh meletup tak?", a: ["Boleh", "Tidak", "Hanya dalam air", "Hanya hari raya"], c: 0, h: "Ia mudah terbakar.", img: "", label: "CIRI" },
+        { q: "Suhu bumi naik dipanggil?", a: ["Demam bumi", "Efek Rumah Hijau", "Bumi panas", "Hujan panas"], c: 1, h: "Greenhouse effect.", img: "", label: "ISU" },
+        { q: "Berapa orang dalam kumpulan 4 D.A.R.A?", a: ["3 orang", "4 orang", "5 orang", "10 orang"], c: 1, h: "D-A-R-A.", img: "", label: "PROFIL" },
+        { q: "Nama subjek projek ni?", a: ["Sains Komputer (ASK)", "Sejarah", "Geografi", "Seni"], c: 0, h: "Asas Sains Komputer.", img: "", label: "AKADEMIK" },
+        { q: "Kenderaan elektrik guna?", a: ["Minyak", "Bateri/Sel Bahan Api", "Kayu", "Lilin"], c: 1, h: "Bateri EV.", img: "", label: "TRANSPORT" },
+        { q: "Recycle bermaksud?", a: ["Bakar sampah", "Kitar semula", "Buang sampah", "Simpan sampah"], c: 1, h: "Guna balik bahan.", img: "", label: "ALAM" },
+        { q: "Sisa organik bermaksud?", a: ["Plastik", "Bahan dari hidupan", "Besi", "Kaca"], c: 1, h: "Contoh: Sisa makanan.", img: "", label: "SISA" },
+        { q: "Adakah air kencing boleh buat hidrogen?", a: ["Boleh (secara teori)", "Sama sekali tidak", "Hanya air laut", "Hanya air paip"], c: 0, h: "Kandungan urea.", img: "", label: "TRIVIA" },
+        { q: "Siapa paling hensem dalam 4 D.A.R.A?", a: ["Semua hensem", "Danish", "Aqeel", "Raja/Aisy"], c: 0, h: "Pilih satu je, jawapan betul.", img: "", label: "LOYALTI" }
     ];
 
     let currentQ = 0; let score = 0; let session = []; let locked = false;
@@ -228,8 +292,10 @@
         window.scrollTo(0,0);
     }
 
+    // --- SISTEM RAWAK (SHUFFLE) ---
     function startQuiz() {
-        session = [...bank].sort(() => 0.5 - Math.random()).slice(0, 5);
+        // Shuffle bank soalan dan ambil 10 soalan sahaja
+        session = [...bank].sort(() => 0.5 - Math.random()).slice(0, 10);
         currentQ = 0; score = 0;
         navTo('s3');
         renderQ();
@@ -240,7 +306,7 @@
         const q = session[currentQ];
         document.getElementById('oyenMain').innerText = "😺";
         document.getElementById('next-btn').style.display = 'none';
-        document.getElementById('q-count').innerText = `PENILAIAN: SOALAN ${currentQ + 1} / 5`;
+        document.getElementById('q-count').innerText = `PENILAIAN: SOALAN ${currentQ + 1} / 10`;
         document.getElementById('q-text').innerText = q.q;
         
         const qImg = document.getElementById('q-img');
@@ -294,12 +360,12 @@
 
     function nextStep() {
         currentQ++;
-        if(currentQ < 5) renderQ();
+        if(currentQ < 10) renderQ();
         else {
-            document.getElementById('score-text').innerText = `${score} / 5`;
+            document.getElementById('score-text').innerText = `${score} / 10`;
             navTo('s4');
-            if(score >= 4) document.getElementById('oyenMain').innerText = "👑";
-            else if(score >= 2) document.getElementById('oyenMain').innerText = "😼";
+            if(score >= 8) document.getElementById('oyenMain').innerText = "👑";
+            else if(score >= 5) document.getElementById('oyenMain').innerText = "😼";
             else document.getElementById('oyenMain').innerText = "😿";
         }
     }
