@@ -302,10 +302,14 @@
         renderQ();
     }
 
-    function renderQ() {
+   function renderQ() {
         locked = false;
         const q = session[currentQ];
+        
+        // Reset Oyen & Bubble setiap kali soalan baru
         document.getElementById('oyenMain').innerText = "😺";
+        document.getElementById('hintBubble').style.display = 'none';
+        
         document.getElementById('next-btn').style.display = 'none';
         document.getElementById('q-count').innerText = `PENILAIAN: SOALAN ${currentQ + 1} / 10`;
         document.getElementById('q-text').innerText = q.q;
@@ -314,28 +318,21 @@
         const qLabel = document.getElementById('q-img-label');
         const qFallback = document.getElementById('q-fallback');
         
-        // Reset paparan sebelum load gambar baru
         qImg.style.display = 'none';
         qLabel.style.display = 'none';
         qFallback.style.display = 'none';
 
         if(q.img && q.img !== "") {
-            // Cuba panggil gambar
             qImg.src = q.img;
             qImg.style.display = 'block';
-            
-            // Set label
             qLabel.innerText = q.label || "VISUAL SOALAN";
             qLabel.style.display = 'block';
-
-            // Kalau gambar tu error (tak jumpa), baru tunjuk Oyen
             qImg.onerror = function() {
                 this.style.display = 'none';
                 qLabel.style.display = 'none';
                 qFallback.style.display = 'flex';
             };
         } else {
-            // Kalau memang soalan tu tak ada gambar (img: ""), tunjuk Oyen terus
             qFallback.style.display = 'flex';
         }
 
@@ -348,6 +345,10 @@
             b.onclick = () => {
                 if(locked) return;
                 locked = true;
+                
+                // --- AUTO HIDE OYEN BILA JAWAB ---
+                document.getElementById('hintBubble').style.display = 'none';
+                
                 if(i === q.c) { 
                     score++; b.style.background = "#dcfce7"; b.style.borderColor = "#22c55e"; 
                     document.getElementById('oyenMain').innerText = "😻";
@@ -359,16 +360,37 @@
             };
             box.appendChild(b);
         });
-        document.getElementById('hintBubble').style.display = 'none';
     }
 
     function showHint() {
         const oyen = document.getElementById('oyenMain');
         const bubble = document.getElementById('hintBubble');
-        const intro = ["Sini aku bisik...", "Oyen rasa jawapannya...", "Psst! Dengar ni...", "Jangan bagitau orang lain..."];
+        const intro = ["Sini aku bisik...", "Oyen rasa jawapannya...", "Psst! Dengar ni..."];
+        
         oyen.innerText = "🧐";
         bubble.innerText = intro[Math.floor(Math.random() * intro.length)] + "\n\n" + session[currentQ].h;
         bubble.style.display = 'block';
+
+        // --- AUTO HIDE SELEPAS 5 SAAT ---
+        setTimeout(() => {
+            bubble.style.display = 'none';
+            if(!locked) oyen.innerText = "😺"; 
+        }, 5000); 
+    }
+
+    function nextStep() {
+        currentQ++;
+        // Pastikan bubble hilang bila tekan soalan seterusnya
+        document.getElementById('hintBubble').style.display = 'none';
+        
+        if(currentQ < 10) renderQ();
+        else {
+            document.getElementById('score-text').innerText = `${score} / 10`;
+            navTo('s4');
+            if(score >= 8) document.getElementById('oyenMain').innerText = "👑";
+            else if(score >= 5) document.getElementById('oyenMain').innerText = "😼";
+            else document.getElementById('oyenMain').innerText = "😿";
+        }
     }
 
     function nextStep() {
