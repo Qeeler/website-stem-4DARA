@@ -191,6 +191,42 @@
                     <p>PHA sangat istimewa kerana keupayaannya untuk <b>terurai sepenuhnya secara alami</b> di dalam tanah dan air laut dalam tempoh singkat (3 hingga 6 bulan). Ia tidak meninggalkan sisa mikroplastik toksik. Inovasi ini membolehkan kita menggantikan penggunaan plastik sekali guna tanpa menjejaskan rantaian makanan hidupan laut.</p>
                 </div>
 
+                <div class="pro-card">
+    <h3>4. Tenaga Hidro</h3>
+    <div class="img-container">
+        <img src="https://thegreenerliving.files.wordpress.com/2013/05/renewable-energy.jpg" alt="Hidro">
+        <span class="img-label">PROSES TENAGA HIDRO</span>
+    </div>
+    <p>Memanfaatkan aliran air sungai atau empangan untuk memusingkan turbin dan menjana kuasa bersih.</p>
+</div>
+
+<div class="pro-card">
+    <h3>5. Tenaga Solar</h3>
+    <div class="img-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Solar_panels_on_roof_of_house.jpg/1200px-Solar_panels_on_roof_of_house.jpg" alt="Solar">
+        <span class="img-label">PANEL PV (PHOTOTOVOLTAIC)</span>
+    </div>
+    <p>Menukar cahaya matahari secara langsung kepada elektrik menggunakan panel solar.</p>
+</div>
+
+<div class="pro-card">
+    <h3>6. Tenaga Angin (Kincir Angin)</h3>
+    <div class="img-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Wind_farm_in_Germany.jpeg/1200px-Wind_farm_in_Germany.jpeg" alt="Angin">
+        <span class="img-label">TURBIN ANGIN</span>
+    </div>
+    <p>Menggunakan kinetik angin untuk memusingkan bilah dan menjana kuasa.</p>
+</div>
+
+<div class="pro-card">
+    <h3>7. Pengurusan Sisa (Kitar Semula)</h3>
+    <div class="img-container">
+        <img src="https://www.rethinkrecycling.com/sites/default/files/styles/extra_large/public/recycling_process_infographic.jpg" alt="Kitar Semula">
+        <span class="img-label">PROSES KITAR SEMULA (3R)</span>
+    </div>
+    <p>Proses 3R membantu mengurangkan sisa di tapak pelupusan.</p>
+</div>
+
                 <button class="btn-mega" onclick="startQuiz()">MULA SESI PENILAIAN ➔</button>
             </div>
 
@@ -272,6 +308,30 @@
         { q: "Sisa organik bermaksud?", a: ["Plastik", "Bahan dari hidupan", "Besi", "Kaca"], c: 1, h: "Contoh: Sisa makanan.", img: "", label: "SISA" },
         { q: "Adakah air kencing boleh buat hidrogen?", a: ["Boleh (secara teori)", "Sama sekali tidak", "Hanya air laut", "Hanya air paip"], c: 0, h: "Kandungan urea.", img: "", label: "TRIVIA" },
         { q: "Siapa paling hensem dalam 4 D.A.R.A?", a: ["Semua hensem", "Danish", "Aqeel", "Raja/Aisy"], c: 0, h: "Pilih satu je, jawapan betul.", img: "", label: "LOYALTI" }
+    { 
+    q: "Tenaga hidroelektrik menggunakan sumber apa?", 
+    a: ["Angin", "Ombak", "Aliran Air", "Matahari"], 
+    c: 2, 
+    h: "Ia guna kuasa air yang mengalir.", 
+    img: "hidro.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (HIDRO)
+    label: "TENAGA HIDRO" 
+},
+{ 
+    q: "Apakah tujuan utama kitar semula?", 
+    a: ["Banyakkan sampah", "Kurangkan sisa di tapak pelupusan", "Jimat ruang almari", "Buat hiasan"], 
+    c: 1, 
+    h: "Supaya bumi tak penuh dengan sampah.", 
+    img: "kitar_semula.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (KITAR SEMULA)
+    label: "KITAR SEMULA" 
+},
+{ 
+    q: "Manakah antara berikut bukan tenaga hijau?", 
+    a: ["Solar", "Kincir Angin", "Arang Batu", "Geoterma"], 
+    c: 2, 
+    h: "Arang batu lepaskan banyak CO2.", 
+    img: "kincir_angin.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (ANGIN)
+    label: "TENAGA BERSIH" 
+}
     ];
 
     let currentQ = 0; let score = 0; let session = []; let locked = false;
