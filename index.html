@@ -3,457 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teknologi Hijau - 4 D.A.R.A</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😺</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <title>4 D.A.R.A • SMKBTHO2 Official</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+    
     <style>
-        :root {
-            --primary: #1b5e20;
-            --secondary: #2ecc71;
-            --dark: #052e16;
-            --light: #f8fafc;
-        }
-
-        body { font-family: 'Inter', sans-serif; background: #f1f5f9; margin: 0; color: #1e293b; line-height: 1.8; }
-
-        /* HEADER */
-        .header-bar {
-            position: fixed; top: 0; width: 100%; height: 80px; background: var(--dark);
-            color: white; display: flex; align-items: center; padding: 0 30px; z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3); box-sizing: border-box;
-        }
-
-        .hamburger { font-size: 32px; cursor: pointer; background: none; border: none; color: white; margin-right: 20px; }
-        .brand-logo { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: var(--secondary); letter-spacing: 1px; }
-
-        /* SIDEBAR */
-        .sidebar {
-            position: fixed; left: -320px; top: 0; width: 300px; height: 100vh;
-            background: var(--dark); color: white; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1001; padding: 80px 25px 30px; display: flex; flex-direction: column; box-sizing: border-box;
-        }
-        .sidebar.active { left: 0; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px); display: none; z-index: 999; }
-        .overlay.active { display: block; }
-
-        .nav-link {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            color: white; padding: 15px; text-align: left; width: 100%; margin-bottom: 12px;
-            border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s;
-        }
-        .nav-link:hover, .nav-link.active-link { background: var(--primary); color: var(--secondary); transform: translateX(10px); }
-
-        /* SIDEBAR FOOTER */
-        .sidebar-footer { margin-top: auto; padding-top: 15px; }
-        .credits-box { margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .credits-box h4 { margin: 0 0 10px 0; font-size: 0.85rem; color: var(--secondary); text-transform: uppercase; }
-        .credits-list { list-style: none; padding: 0; margin: 0; font-size: 0.8rem; color: #cbd5e1; }
-        .credits-list li { margin-bottom: 5px; border-left: 2px solid var(--secondary); padding-left: 10px; }
-        .contact-info { font-size: 0.75rem; color: #94a3b8; margin-top: 15px; line-height: 1.5; }
-        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; margin-top: 15px; }
-
-        /* CONTENT */
-        .main-wrapper { margin-top: 100px; padding: 20px; display: flex; justify-content: center; }
-        .content-container { width: 100%; max-width: 900px; background: white; border-radius: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden; padding: 50px; box-sizing: border-box; }
-
-        .screen { display: none; animation: slideUp 0.6s ease-out forwards; }
-        .screen.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* IMAGE SYSTEM WITH LABEL */
-        .img-container { margin-bottom: 30px; text-align: center; background: #f1f5f9; border-radius: 20px; padding: 10px; border: 1px solid #e2e8f0; position: relative; }
-        .img-container img { max-width: 100%; height: auto; border-radius: 15px; display: block; margin: 0 auto; max-height: 300px; }
-        .img-label { display: block; margin-top: 10px; font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
-        .img-fallback { padding: 40px 20px; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        .img-fallback span { font-size: 60px; display: block; }
-
-        h1 { font-family: 'Space Grotesk'; font-size: 2.6rem; color: var(--dark); margin-top: 0; }
-        .pro-card { background: #f8fafc; border-left: 12px solid var(--primary); padding: 35px; margin-bottom: 35px; border-radius: 20px; }
-        .pro-card h3 { color: var(--primary); margin-top: 0; font-size: 1.7rem; font-family: 'Space Grotesk'; }
-        
-        .btn-mega {
-            background: var(--primary); color: white; border: none; padding: 25px;
-            border-radius: 60px; font-size: 1.4rem; font-weight: 900; cursor: pointer;
-            width: 100%; margin-top: 20px; box-shadow: 0 8px 0 var(--dark); transition: 0.2s;
-        }
-
-        .hint-zone { position: fixed; bottom: 40px; right: 40px; z-index: 100; text-align: right; }
-        .bubble { background: white; border: 3px solid var(--primary); padding: 20px; border-radius: 25px; width: 240px; margin-bottom: 15px; display: none; box-shadow: 0 15px 40px rgba(0,0,0,0.2); font-weight: 700; position: relative; }
-        .bubble::after { content: ''; position: absolute; bottom: -15px; right: 30px; border-width: 15px 15px 0; border-style: solid; border-color: white transparent; }
-        /* Oyen asal (Desktop) */
-.oyen-face { 
-    font-size: 75px; 
-    cursor: pointer; 
-    transition: 0.3s; 
-    display: inline-block; 
-}
-
-/* Oyen versi Phone (Skrin Kecil) */
-@media screen and (max-width: 600px) {
-    .oyen-face { 
-        font-size: 45px; /* Kecilkan sikit supaya tak ganggu butang */
-    }
-    .bubble {
-        width: 180px; /* Bubble dialog pun kecil sikit */
-        font-size: 0.8rem;
-    }
-}
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background-color: #f1f5f9; font-family: 'Segoe UI', Tahoma, sans-serif; color: #0f172a; scroll-behavior: smooth; }
+        #overlay { position: fixed; display: none; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.6); z-index: 1500; transition: 0.4s; }
+        .header { background-color: #064e3b; color: #4ade80; padding: 15px 25px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .hamburger { font-size: 24px; cursor: pointer; margin-right: 20px; padding: 5px 10px; border: 1.5px solid #4ade80; border-radius: 8px; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #064e3b; overflow-x: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+        .sidebar-content { padding: 20px 0; flex-grow: 1; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 15px; color: #cbd5e0; display: block; border-left: 5px solid transparent; }
+        .sidebar a.active { background: #14532d; color: white; border-left: 5px solid #4ade80; }
+        .sidebar .section-label { color: #4ade80; font-weight: 800; font-size: 11px; padding: 25px 25px 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar .credit-box { padding: 0 25px; color: #f1f5f9; font-size: 13px; line-height: 1.8; }
+        .sidebar-footer { padding: 20px 25px; background: #022c22; border-top: 1px solid #065f46; font-size: 11px; color: #94a3b8; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .main-card { background: white; border-radius: 24px; padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .content-section { display: none; animation: fadeIn 0.6s ease-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .green-strip { border-left: 12px solid #15803d; padding-left: 25px; margin-bottom: 30px; }
+        h1 { color: #064e3b; font-size: 2.5rem; margin: 0; }
+        h2 { color: #166534; font-size: 1.8rem; margin-top: 45px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        p { line-height: 2; text-align: justify; color: #334155; font-size: 1.1rem; }
+        .image-box { background: #f8fafc; border-radius: 24px; padding: 20px; text-align: center; margin: 30px 0; border: 1.5px solid #e2e8f0; }
+        .main-img { width: 100%; max-width: 650px; border-radius: 15px; }
+        .btn-next { background: linear-gradient(135deg, #166534 0%, #064e3b 100%); color: white; width: 100%; padding: 22px; border: none; border-radius: 100px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 50px; transition: 0.3s; }
+        .cat-hint-box { display: flex; align-items: center; background: #fffbeb; padding: 20px; border-radius: 20px; border: 2px solid #fbbf24; margin-bottom: 30px; }
+        .cat-btn { font-size: 45px; cursor: pointer; background: none; border: none; }
+        .hint-bubble { margin-left: 20px; color: #92400e; font-weight: 600; font-size: 1.05rem; flex: 1; }
+        .opt { background: #fff; border: 2px solid #e2e8f0; border-radius: 18px; padding: 20px; margin: 15px 0; cursor: pointer; font-size: 1.1rem; transition: 0.2s; }
+        .opt:hover { border-color: #15803d; background: #f0fdf4; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; font-weight: bold; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
     </style>
 </head>
 <body>
 
-    <header class="header-bar">
-        <button class="hamburger" onclick="toggleSidebar()">☰</button>
-        <div class="brand-logo">4 D.A.R.A • TEKNOLOGI HIJAU</div>
-    </header>
+<div id="overlay" onclick="closeNav()"></div>
 
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-    <nav class="sidebar" id="sidebar">
-        <button class="nav-link active-link" onclick="navTo('s1', this)">🏠 Profil Kumpulan</button>
-        <button class="nav-link" onclick="navTo('s2', this)">📖 Modul Pembelajaran</button>
+<div id="mySidebar" class="sidebar">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" style="text-align:right; font-size:30px;" onclick="closeNav()">&times;</a>
+        <div class="section-label">Menu Utama</div>
+        <a href="javascript:void(0)" id="nav-profil" class="active" onclick="showTab('profil')">🏠 Profil Kumpulan</a>
+        <a href="javascript:void(0)" id="nav-modul" onclick="showTab('modul')">📖 Modul Pembelajaran</a>
         
-        <div class="sidebar-footer">
-            <div class="credits-box">
-                <h4>Kredit Pasukan</h4>
-                <ul class="credits-list">
-                    <li>Danish (Leader & Design)</li>
-                    <li>Aisy (Creative Designer)</li>
-                    <li>Raja (Technical Assistant)</li>
-                    <li>Aqeel (Lead Software Dev, Overall Handsome)</li>
-                </ul>
-            </div>
-            <strong style="color:var(--secondary); font-size: 0.8rem;">HUBUNGI KAMI:</strong>
-            <div class="contact-info">
-                📞 +6011 1581 1246<br>
-                📧 m-11995403@moe-dl.edu.my<br>
-                📍 [Sekolah Menengah Kebangsaan Bandar Tun Hussein Onn 2, Persiaran Suadamai, Bandar Tun Hussein Onn, 43200 Cheras, Selangor]
-            </div>
-            <div class="copyright">&copy; 2026 Kumpulan 4 D.A.R.A.</div>
+        <div class="section-label">Pasukan Projek</div>
+        <div class="credit-box">
+            <b>DANISH</b> - Ketua Projek<br>
+            <b>AISY</b> - Pereka Kreatif<br>
+            <b>RAJA</b> - Pembantu Teknikal<br>
+            <b>AQEEL</b> - Pembangun Sistem
         </div>
-    </nav>
-
-    <div class="hint-zone" id="hintZone" style="display: none;">
-        <div class="bubble" id="hintBubble"></div>
-        <div class="oyen-face" id="oyenMain" onclick="showHint()">😺</div>
     </div>
+    <div class="sidebar-footer">
+        <div style="color: #4ade80; font-weight: bold; margin-bottom: 8px;">HUBUNGI KAMI</div>
+        <b>SMK Bandar Tun Hussein Onn 2</b><br>
+        Persiaran Suasana, BTHO, 43200 Selangor.<br><br>
+        📧 m-11995403@moe-dl.edu.my<br>
+        📞 +6011 1581 1246<br><br>
+        <span style="opacity: 0.6;">© 2026 Kumpulan 4 D.A.R.A</span>
+    </div>
+</div>
 
-    <main class="main-wrapper">
-        <div class="content-container">
+<div class="header">
+    <div class="hamburger" onclick="openNav()">☰</div>
+    <div style="font-weight: bold; letter-spacing: 1px;">4 D.A.R.A • SMKBTHO2</div>
+</div>
+
+<div class="container">
+    <div class="main-card">
+        
+        <div id="profil" class="content-section active">
+            <div class="green-strip"><h1>Mengenai 4 D.A.R.A</h1></div>
+            <div class="image-box"><img src="4DARA.jpg" class="main-img"></div>
+            <h2>Filosofi & Identiti Pasukan</h2>
+            <p>Pasukan <b>4 D.A.R.A</b> dibentuk berdasarkan aspirasi untuk menggabungkan kepakaran teknologi digital dengan kesedaran ekologi. Nama kami merupakan akronim daripada <b>Danish, Aisy, Raja, dan Aqeel</b>—empat individu yang membawa perspektif berbeza dalam pembangunan web interaktif ini. Angka '4' melambangkan kestabilan struktur pasukan dalam melaksanakan penyelidikan mengenai Teknologi Hijau.</p>
+            <h2>Visi Strategik</h2>
+            <p>Kami bermatlamat untuk menyediakan platform pendidikan yang mampu mengubah persepsi masyarakat terhadap sisa kimia. Melalui kajian kes di <b>SMKBTHO2</b>, kami ingin membuktikan bahawa sisa harian jika diurus dengan Teknologi Hijau, mampu menjadi sumber tenaga boleh baharu yang efisien.</p>
+            <button class="btn-next" onclick="showTab('modul')">DOKUMENTASI PEMBELAJARAN ➔</button>
+        </div>
+
+        <div id="modul" class="content-section">
+            <div class="green-strip"><h1>Arkib Ilmu Teknologi Hijau</h1></div>
             
-            <div id="s1" class="screen active">
-                <h1>Profil Strategik Kumpulan</h1>
-                <div class="img-container">
-                    <img src="4DARA.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
-                    <span class="img-label">KUMPULAN 4 D.A.R.A (3 ASK)</span>
-                    <div class="img-fallback"><span>😺</span><p><b>Oyen: Fail 4DARA.jpg tidak ditemui</b></p></div>
-                </div>
-                <div class="pro-card">
-                    <h3>Visi 4 D.A.R.A.</h3>
-                    <p>Kami merupakan barisan penyelidik muda dari <b>SMK Bandar Tun Hussein Onn 2</b> yang berdedikasi tinggi dalam mengintegrasikan kepakaran pengaturcaraan Asas Sains Komputer dengan penyelesaian alam sekitar secara holistik. Kumpulan 4 D.A.R.A terdiri daripada <b>Danish, Aisy, Raja, dan Aqeel</b>.</p>
-                    <p>Matlamat kami adalah untuk membangunkan satu kerangka digital yang mampu mengedukasi masyarakat tentang potensi besar Teknologi Hijau. Kami percaya bahawa melalui kefahaman yang mendalam terhadap pemprosesan sisa organik dan tenaga boleh baharu, kita mampu mengurangkan jejak karbon secara drastik demi kelestarian generasi masa hadapan.</p>
-                </div>
-            </div>
+            <section>
+                <h2>1. Analisis Gas Metana (CH4)</h2>
+                <div class="image-box"><img src="metana.jpg" class="main-img"></div>
+                <p>Gas Metana merupakan gas rumah hijau yang mempunyai kekuatan memerangkap haba 28 kali lebih efisien berbanding Karbon Dioksida ($CO_2$). Di Malaysia, tapak pelupusan sisa pepejal menyumbang hampir 50% pelepasan metana negara. Melalui <b>Teknologi Hijau</b>, metana dikumpul melalui sistem paip bawah tanah (Landfill Gas Recovery) untuk diproses menjadi <b>Biogas</b> bagi menjana tenaga elektrik bersih (Waste-to-Energy).</p>
+            </section>
 
-            <div id="s2" class="screen">
-                <h1>Modul Teknologi Hijau</h1>
-                
-                <div class="pro-card">
-                    <h3>1. Analisis Gas Metana (CH4)</h3>
-                    <div class="img-container">
-                        <img src="metana.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
-                        <span class="img-label">RAJAH 1.1: KITARAN GAS METANA</span>
-                        <div class="img-fallback"><span>😺</span></div>
-                    </div>
-                    <p>Gas Metana merupakan salah satu gas rumah hijau yang paling kritikal di dunia hari ini. Ia terhasil daripada aktiviti penguraian bahan organik (seperti sisa makanan, sisa pertanian, dan najis ternakan) oleh mikroorganisma dalam keadaan <b>anaerobik</b> (tanpa bekalan oksigen). Di tapak pelupusan sampah, pengumpulan sisa organik yang tidak terkawal menjadi punca utama pembebasan metana secara besar-besaran ke atmosfera.</p>
-                    <p>Metana mempunyai keupayaan untuk memerangkap haba 28 kali lebih kuat berbanding Karbon Dioksida (CO2). Solusi yang kami cadangkan adalah pembinaan loji <b>Biogas Digestor</b> yang mampu menangkap gas ini sebelum ia terbebas, lalu menukarkannya kepada sumber bahan api hijau untuk kegunaan domestik dan industri.</p>
-                </div>
+            <section>
+                <h2>2. Revolusi Bioplastik: PHA</h2>
+                <div class="image-box"><img src="pha.jpg" class="main-img"></div>
+                <p><b>Polyhydroxyalkanoates (PHA)</b> adalah polimer linear yang dihasilkan secara semula jadi oleh bakteria melalui proses penapaian gula atau lipid. Keunikan utama PHA adalah sifatnya yang <b>biokompatibel</b> dan <b>biodegradasi secara total</b>. Ia mampu terurai dalam persekitaran semula jadi tanpa meninggalkan sisa toksik atau mikroplastik, menjadikannya pengganti terbaik bagi plastik berasaskan petroleum.</p>
+            </section>
 
-                <div class="pro-card">
-                    <h3>2. Ekosistem Hidrogen Hijau</h3>
-                    <div class="img-container">
-                        <img src="hidrogen.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
-                        <span class="img-label">RAJAH 2.1: PROSES ELEKTROLISIS AIR</span>
-                        <div class="img-fallback"><span>😺</span></div>
-                    </div>
-                    <p>Hidrogen Hijau merupakan revolusi tenaga yang paling bersih setakat ini. Ia digelar "hijau" kerana proses penghasilannya menggunakan kaedah <b>elektrolisis air</b> yang dikuasakan sepenuhnya oleh tenaga boleh baharu seperti panel solar atau kincir angin. Melalui proses ini, air (H2O) dipecahkan kepada gas oksigen (O2) dan gas hidrogen (H2) tanpa melibatkan sebarang pembakaran bahan api fosil.</p>
-                    <p>Apabila hidrogen ini digunakan dalam sel bahan api kenderaan, satu-satunya hasil sampingan yang dihasilkan adalah <b>wap air murni</b>. Ini bermakna sistem ini mencapai tahap sifar emisi (Net Zero Carbon), yang sangat kritikal bagi memulihkan lapisan ozon dan mengurangkan pencemaran udara.</p>
-                </div>
+            <section>
+                <h2>3. Tenaga Solar & Hidrogen Hijau</h2>
+                <div class="image-box"><img src="hidro.jpg" class="main-img" style="margin-bottom:10px;"><img src="hidrogen.jpg" class="main-img"></div>
+                <p>Sistem solar berfungsi berasaskan <b>Kesan Fotovoltaik</b>, di mana sel semikonduktor silikon menukarkan foton cahaya matahari terus kepada elektron bebas. Manakala <b>Hidrogen Hijau</b> dihasilkan melalui proses <b>elektrolisis</b> air menggunakan tenaga bersih. Ia dianggap sebagai bahan api masa depan kerana tidak menghasilkan emisi karbon, hanya wap air ($H_2O$).</p>
+            </section>
 
-                <div class="pro-card">
-                    <h3>3. Polimer Biodegradasi PHA</h3>
-                    <div class="img-container">
-                        <img src="pha.jpg" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
-                        <span class="img-label">RAJAH 3.1: STRUKTUR BIOPLASTIK PHA</span>
-                        <div class="img-fallback"><span>😺</span></div>
-                    </div>
-                    <p><b>Polyhydroxyalkanoates (PHA)</b> adalah jawapan kepada krisis plastik dunia. PHA merupakan biopolimer linear yang dihasilkan secara organik melalui penapaian bahan mentah seperti minyak sayuran atau sisa kanji oleh mikrob/bakteria. Bakteria ini menghasilkan PHA sebagai simpanan tenaga semulajadi, sama seperti manusia menyimpan lemak.</p>
-                    <p>PHA sangat istimewa kerana keupayaannya untuk <b>terurai sepenuhnya secara alami</b> di dalam tanah dan air laut dalam tempoh singkat (3 hingga 6 bulan). Ia tidak meninggalkan sisa mikroplastik toksik. Inovasi ini membolehkan kita menggantikan penggunaan plastik sekali guna tanpa menjejaskan rantaian makanan hidupan laut.</p>
-                </div>
+            <section>
+                <h2>4. Tenaga Kinetik & Ekonomi Kitaran</h2>
+                <div class="image-box"><img src="kincir_angin.jpg" style="max-width:300px; margin-right:10px;" class="main-img"><img src="kitar_semula.jpg" style="max-width:300px;" class="main-img"></div>
+                <p>Turbin angin mengeksploitasi tenaga kinetik udara untuk memacu generator elektrik. Digabungkan dengan konsep <b>Ekonomi Kitaran (Circular Economy)</b>, sisa bahan mentah direka untuk digunakan semula (Cradle-to-Cradle), sekaligus mengurangkan penggunaan tenaga pembuatan sehingga 90% dan meminimumkan beban sisa di tapak pelupusan.</p>
+            </section>
 
-                <div class="pro-card">
-    <h3>4. Tenaga Hidro</h3>
-    <div class="img-container">
-        <img src="https://thegreenerliving.files.wordpress.com/2013/05/renewable-energy.jpg" alt="Hidro">
-        <span class="img-label">PROSES TENAGA HIDRO</span>
-    </div>
-    <p>Memanfaatkan aliran air sungai atau empangan untuk memusingkan turbin dan menjana kuasa bersih.</p>
-</div>
-
-<div class="pro-card">
-    <h3>5. Tenaga Solar</h3>
-    <div class="img-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Solar_panels_on_roof_of_house.jpg/1200px-Solar_panels_on_roof_of_house.jpg" alt="Solar">
-        <span class="img-label">PANEL PV (PHOTOTOVOLTAIC)</span>
-    </div>
-    <p>Menukar cahaya matahari secara langsung kepada elektrik menggunakan panel solar.</p>
-</div>
-
-<div class="pro-card">
-    <h3>6. Tenaga Angin (Kincir Angin)</h3>
-    <div class="img-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Wind_farm_in_Germany.jpeg/1200px-Wind_farm_in_Germany.jpeg" alt="Angin">
-        <span class="img-label">TURBIN ANGIN</span>
-    </div>
-    <p>Menggunakan kinetik angin untuk memusingkan bilah dan menjana kuasa.</p>
-</div>
-
-<div class="pro-card">
-    <h3>7. Pengurusan Sisa (Kitar Semula)</h3>
-    <div class="img-container">
-        <img src="https://www.rethinkrecycling.com/sites/default/files/styles/extra_large/public/recycling_process_infographic.jpg" alt="Kitar Semula">
-        <span class="img-label">PROSES KITAR SEMULA (3R)</span>
-    </div>
-    <p>Proses 3R membantu mengurangkan sisa di tapak pelupusan.</p>
-</div>
-
-                <button class="btn-mega" onclick="startQuiz()">MULA SESI PENILAIAN ➔</button>
-            </div>
-
-            <div id="s3" class="screen">
-                <div id="q-count" style="font-weight:900; color:var(--primary); margin-bottom: 10px;"></div>
-                
-                <div class="img-container" id="q-img-box" style="margin-bottom: 20px;">
-                    <img id="q-img" src="" onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').style.display='flex'; this.nextElementSibling.style.display='none';">
-                    <span id="q-img-label" class="img-label"></span>
-                    <div class="img-fallback" id="q-fallback"><span>😺</span><p style="font-size: 0.8rem; margin: 5px 0 0;">Visual Soalan</p></div>
-                </div>
-
-                <h2 id="q-text" style="margin:20px 0;"></h2>
-                <div id="q-opts" style="display: grid; gap: 15px;"></div>
-                <button id="next-btn" class="btn-mega" style="display:none; background:#333;" onclick="nextStep()">SOALAN BERIKUTNYA ➔</button>
-            </div>
-
-            <div id="s4" class="screen" style="text-align:center;">
-                <h1>ANALISIS PRESTASI</h1>
-                <h2 id="score-text" style="font-size:7rem; color:var(--secondary); margin:0;">0/5</h2>
-                <button class="btn-mega" onclick="navTo('s2')">ULANG KAJI MODUL</button>
-            </div>
+            <button class="btn-next" onclick="startQuiz()">UJIAN PENILAIAN ➔</button>
         </div>
-    </main>
-    
+
+        <div id="quiz-box" class="content-section">
+            <div class="cat-hint-box">
+                <button class="cat-btn" onclick="showHint()">🐱</button>
+                <div class="hint-bubble" id="hint-bubble">Meow! Klik saya untuk hint!</div>
+            </div>
+            <h2 id="q-no" style="color:#15803d;">SOALAN</h2>
+            <h2 id="q-text" style="text-align:center; margin-bottom: 40px;">Sedia?</h2>
+            <div id="q-options"></div>
+            <button id="next-btn" class="btn-next" onclick="renderQ()" style="display:none; background:#0f172a;">TERUSKAN ➔</button>
+        </div>
+
+    </div>
+</div>
+
 <script>
-    const bank = [
-        // --- SOALAN KUMPULAN (EASTER EGGS) ---
-        { q: "Siapakah Leader kumpulan 4 D.A.R.A?", a: ["Aqeel", "Danish", "Aisy", "Raja"], c: 1, h: "Dia yang jaga design dan lead team ni.", img: "4DARA.png", label: "PROFIL PASUKAN" },
-        { q: "Siapakah Main Developer yang tulis kod website ni?", a: ["Danish", "Raja", "Aqeel", "Aisy"], c: 2, h: "Si Aqeel tu lah!", img: "", label: "TECH TEAM" },
-        { q: "Sekolah manakah asal kumpulan 4 D.A.R.A?", a: ["SMKBTHO1", "SMKBTHO2", "SMK Cheras", "SMK Perdana"], c: 1, h: "Bandar Tun Hussein Onn 2.", img: "", label: "LOKASI" },
-        { q: "Aisy memegang peranan sebagai apa?", a: ["Ketua", "Developer", "Designer", "Pemandu"], c: 2, h: "Creative Designer kita.", img: "", label: "PERANAN" },
-        { q: "Raja membantu dalam bahagian apa?", a: ["Technical", "Masak", "Tidur", "Lari"], c: 0, h: "Technical Assistant.", img: "", label: "PERANAN" },
-
-        // --- SOALAN METANA (CH4) ---
-        { q: "Gas Metana terhasil tanpa oksigen, dipanggil proses?", a: ["Aerobik", "Anaerobik", "Fotosintesis", "Elektrolisis"], c: 1, h: "Kawasan kedap udara.", img: "metana.jpg", label: "PROSES KIMIA" },
-        { q: "Metana adalah gas rumah hijau yang?", a: ["Lemah", "Kuat", "Wangi", "Berwarna Biru"], c: 1, h: "Lagi kuat dari CO2.", img: "metana.jpg", label: "CIRI GAS" },
-        { q: "Berapa kali ganda Metana memerangkap haba berbanding CO2?", a: ["10x", "28x", "50x", "100x"], c: 1, h: "Jawapannya dalam teks modul.", img: "metana.jpg", label: "ANALISIS" },
-        { q: "Antara berikut, mana punca utama Metana?", a: ["Ekzos kereta", "Tapak pelupusan sampah", "Kilang besi", "Asap rokok"], c: 1, h: "Sisa organik yang mereput.", img: "", label: "PUNCA EMISI" },
-        { q: "Gas Metana boleh ditukar jadi tenaga melalui?", a: ["Kincir angin", "Biogas Digestor", "Panel solar", "Bateri"], c: 1, h: "Tangkap gas tu guna loji.", img: "", label: "SOLUSI" },
-
-        // --- SOALAN HIDROGEN HIJAU ---
-        { q: "Proses memisahkan air (H2O) guna elektrik dipanggil?", a: ["Penyejatan", "Elektrolisis", "Kondensasi", "Pembakaran"], c: 1, h: "Guna elektrod.", img: "hidrogen.jpg", label: "ELEKTROLISIS" },
-        { q: "Hasil tunggal ekzos kenderaan hidrogen?", a: ["CO2", "Wap Air (H2O)", "Asap hitam", "Oksigen"], c: 1, h: "Sangat bersih.", img: "hidrogen.jpg", label: "EKZOS" },
-        { q: "Kenapa ia dipanggil Hidrogen HIJAU?", a: ["Warna gasnya hijau", "Guna tenaga boleh baharu", "Dibuat dari daun", "Guna baja"], c: 1, h: "Sebab punca elektriknya bersih.", img: "hidrogen.jpg", label: "DEFINISI" },
-        { q: "Hidrogen disimpan dalam bentuk apa dalam kereta?", a: ["Cecair/Gas termampat", "Ketul ais", "Bateri alkali", "Pasir"], c: 0, h: "Dalam tangki khas.", img: "", label: "PENYIMPANAN" },
-        { q: "Apakah alat yang menukar hidrogen jadi elektrik dalam kereta?", a: ["Enjin petrol", "Sel Bahan Api", "Radiator", "Karburator"], c: 1, h: "Fuel Cell.", img: "", label: "TEKNOLOGI" },
-
-        // --- SOALAN PHA (PLASTIK BIODEGRADASI) ---
-        { q: "Apakah maksud singkatan PHA?", a: ["Plastic High Acid", "Polyhydroxyalkanoates", "Public Health Area", "Poly Acid"], c: 1, h: "Nama kimia biopolimer.", img: "pha.jpg", label: "SAINS" },
-        { q: "PHA dihasilkan secara semulajadi oleh?", a: ["Mesin kilang", "Bakteria", "Akar pokok", "Cacing"], c: 1, h: "Mikroorganisma.", img: "pha.jpg", label: "PRODUKSI" },
-        { q: "Kelebihan utama plastik PHA?", a: ["Lagi keras dari besi", "Mudah terurai semulajadi", "Warna cantik", "Harga sangat murah"], c: 1, h: "Biodegradasi.", img: "pha.jpg", label: "KELEBIHAN" },
-        { q: "Berapa lama PHA reput dalam air laut?", a: ["100 tahun", "10 tahun", "3-6 bulan", "1 minggu"], c: 2, h: "Sangat pantas.", img: "", label: "TEMPOH" },
-        { q: "Bakteria simpan PHA sebagai apa dalam badan mereka?", a: ["Lemak/Tenaga", "Racun", "Tulang", "Air"], c: 0, h: "Simpanan tenaga.", img: "", label: "BIOLOGI" },
-
-        // --- TAMBAHAN 25 SOALAN LAGI (RAWAK) ---
-        { q: "Teknologi Hijau bertujuan untuk?", a: ["Jimat duit", "Lestarikan alam", "Nampak moden", "Banyakkan kilang"], c: 1, h: "Demi masa depan.", img: "", label: "OBJEKTIF" },
-        { q: "Antara berikut bukan tenaga boleh baharu?", a: ["Solar", "Angin", "Arang batu", "Hidro"], c: 2, h: "Fosil tidak boleh diperbaharui.", img: "", label: "TENAGA" },
-        { q: "Apa maksud Sifar Karbon?", a: ["Tiada karbon dioksida", "Karbon warna putih", "Bakar karbon", "Guna arang"], c: 0, h: "Net Zero.", img: "", label: "ISTILAH" },
-        { q: "Panel solar menukar cahaya matahari jadi?", a: ["Haba", "Air", "Elektrik", "Angin"], c: 2, h: "Tenaga fotovoltaik.", img: "", label: "SOLAR" },
-        { q: "Sisa makanan boleh diproses jadi?", a: ["Baja/Biogas", "Plastik", "Besi", "Kertas"], c: 0, h: "Kompos.", img: "", label: "SISA" },
-        { q: "Wap air hasil hidrogen selamat tak?", a: ["Beracun", "Sangat selamat", "Meletup", "Berasid"], c: 1, h: "Ia cuma air murni.", img: "", label: "KESELAMATAN" },
-        { q: "PHA dibuat daripada apa?", a: ["Minyak sayuran/Sisa kanji", "Pasir pantai", "Besi buruk", "Kayu"], c: 0, h: "Bahan organik.", img: "", label: "BAHAN" },
-        { q: "Gas rumah hijau menyebabkan?", a: ["Hujan salji", "Pemanasan global", "Gempa bumi", "Tsunami"], c: 1, h: "Suhu bumi naik.", img: "", label: "KESAN" },
-        { q: "Sistem gelung tertutup bermaksud?", a: ["Tiada pembaziran", "Bulatan hitam", "Pagar besi", "Litar pintas"], c: 0, h: "Semua dikitar semula.", img: "", label: "SISTEM" },
-        { q: "Warna yang sinonim dengan alam sekitar?", a: ["Merah", "Hijau", "Kuning", "Hitam"], c: 1, h: "Teknologi apa ni?", img: "", label: "TRIVIA" },
-        { q: "Pencemaran mikroplastik boleh dikurangi guna?", a: ["Beg plastik biasa", "Plastik PHA", "Beg kertas", "Botol kaca"], c: 1, h: "Sebab ia reput.", img: "", label: "SOLUSI" },
-        { q: "Kincir angin perlukan apa untuk pusing?", a: ["Air", "Elektrik", "Angin", "Enjin"], c: 2, h: "Tenaga kinetik udara.", img: "", label: "TENAGA" },
-        { q: "Hidrogen hijau mahal sebab apa?", a: ["Sukar jumpa air", "Kos elektrolisis tinggi", "Sebab ia hijau", "Kereta berat"], c: 1, h: "Kos teknologi baru.", img: "", label: "EKONOMI" },
-        { q: "Adakah PHA selamat untuk hidupan laut?", a: ["Tidak", "Ya", "Mungkin", "Hanya untuk ikan paus"], c: 1, h: "Sebab tiada toksik.", img: "", label: "HIDUPAN LAUT" },
-        { q: "Oyen dalam website ni kucing jenis apa?", a: ["Kucing Hitam", "Kucing Oyen (Ginger)", "Kucing Siam", "Robot"], c: 1, h: "Tengok muka dia.", img: "", label: "MASKOT" },
-        { q: "Elektrolisis perlukan dua galah besi iaitu?", a: ["Anod & Katod", "Kayu & Besi", "Sudu & Garpu", "Kiri & Kanan"], c: 0, h: "Istilah kimia.", img: "", label: "SAINS" },
-        { q: "Metana boleh meletup tak?", a: ["Boleh", "Tidak", "Hanya dalam air", "Hanya hari raya"], c: 0, h: "Ia mudah terbakar.", img: "", label: "CIRI" },
-        { q: "Suhu bumi naik dipanggil?", a: ["Demam bumi", "Efek Rumah Hijau", "Bumi panas", "Hujan panas"], c: 1, h: "Greenhouse effect.", img: "", label: "ISU" },
-        { q: "Berapa orang dalam kumpulan 4 D.A.R.A?", a: ["3 orang", "4 orang", "5 orang", "10 orang"], c: 1, h: "D-A-R-A.", img: "", label: "PROFIL" },
-        { q: "Nama subjek projek ni?", a: ["Sains Komputer (ASK)", "Sejarah", "Geografi", "Seni"], c: 0, h: "Asas Sains Komputer.", img: "", label: "AKADEMIK" },
-        { q: "Kenderaan elektrik guna?", a: ["Minyak", "Bateri/Sel Bahan Api", "Kayu", "Lilin"], c: 1, h: "Bateri EV.", img: "", label: "TRANSPORT" },
-        { q: "Recycle bermaksud?", a: ["Bakar sampah", "Kitar semula", "Buang sampah", "Simpan sampah"], c: 1, h: "Guna balik bahan.", img: "", label: "ALAM" },
-        { q: "Sisa organik bermaksud?", a: ["Plastik", "Bahan dari hidupan", "Besi", "Kaca"], c: 1, h: "Contoh: Sisa makanan.", img: "", label: "SISA" },
-        { q: "Adakah air kencing boleh buat hidrogen?", a: ["Boleh (secara teori)", "Sama sekali tidak", "Hanya air laut", "Hanya air paip"], c: 0, h: "Kandungan urea.", img: "", label: "TRIVIA" },
-        { q: "Siapa paling hensem dalam 4 D.A.R.A?", a: ["Semua hensem", "Danish", "Aqeel", "Raja/Aisy"], c: 0, h: "Pilih satu je, jawapan betul.", img: "", label: "LOYALTI" }
-    { 
-    q: "Tenaga hidroelektrik menggunakan sumber apa?", 
-    a: ["Angin", "Ombak", "Aliran Air", "Matahari"], 
-    c: 2, 
-    h: "Ia guna kuasa air yang mengalir.", 
-    img: "hidro.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (HIDRO)
-    label: "TENAGA HIDRO" 
-},
-{ 
-    q: "Apakah tujuan utama kitar semula?", 
-    a: ["Banyakkan sampah", "Kurangkan sisa di tapak pelupusan", "Jimat ruang almari", "Buat hiasan"], 
-    c: 1, 
-    h: "Supaya bumi tak penuh dengan sampah.", 
-    img: "kitar_semula.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (KITAR SEMULA)
-    label: "KITAR SEMULA" 
-},
-{ 
-    q: "Manakah antara berikut bukan tenaga hijau?", 
-    a: ["Solar", "Kincir Angin", "Arang Batu", "Geoterma"], 
-    c: 2, 
-    h: "Arang batu lepaskan banyak CO2.", 
-    img: "kincir_angin.jpg", // GUNA NAMA FAIL GAMBAR JANAAN AI (ANGIN)
-    label: "TENAGA BERSIH" 
-}
-    ];
-
-    let currentQ = 0; let score = 0; let session = []; let locked = false;
-
-    function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
+    function openNav() { 
+        document.getElementById("mySidebar").style.width = "320px"; 
+        document.getElementById("overlay").style.display = "block"; 
+    }
+    function closeNav() { 
+        document.getElementById("mySidebar").style.width = "0"; 
+        document.getElementById("overlay").style.display = "none"; 
     }
 
-    function navTo(id, btn) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        if(btn) {
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-link'));
-            btn.classList.add('active-link');
-        }
-        document.getElementById('hintZone').style.display = (id === 's3') ? 'block' : 'none';
-        document.getElementById('sidebar').classList.remove('active');
-        document.getElementById('overlay').classList.remove('active');
+    function showTab(tabId) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+        if (tabId === 'profil') document.getElementById('nav-profil').classList.add('active');
+        else document.getElementById('nav-modul').classList.add('active');
+        closeNav(); 
         window.scrollTo(0,0);
     }
 
-    // --- SISTEM RAWAK (SHUFFLE) ---
+    // DATABASE SOALAN (20 SOALAN)
+    const allQuestions = [
+        { q: "Siapakah Ketua Projek 4 D.A.R.A?", a: ["Aqeel", "Danish", "Raja", "Aisy"], c: 1, hint: "Huruf D dalam D.A.R.A!" },
+        { q: "Apakah maksud angka '4' pada nama kumpulan?", a: ["4 tahun kajian", "4 jenis gas", "Bilangan ahli pasukan", "4 buah sekolah"], c: 2, hint: "Kira nama Danish, Aisy, Raja dan Aqeel!" },
+        { q: "Siapakah pereka kreatif projek ini?", a: ["Aisy", "Raja", "Danish", "Aqeel"], c: 0, hint: "Huruf A yang pertama!" },
+        { q: "Siapakah Pembangun Sistem 4 D.A.R.A?", a: ["Danish", "Aisy", "Raja", "Aqeel"], c: 3, hint: "Nama bermula dengan Aq!" },
+        { q: "Siapakah Pembantu Teknikal pasukan?", a: ["Raja", "Danish", "Aisy", "Aqeel"], c: 0, hint: "Huruf R dalam D.A.R.A!" },
+        { q: "Gas Metana memerangkap haba berapa kali lebih kuat dari CO2?", a: ["2x", "10x", "28x", "100x"], c: 2, hint: "Ia sangat kuat!" },
+        { q: "Proses 'Waste-to-Energy' menghasilkan apa?", a: ["Sisa toksik", "Biogas", "Arang batu", "Plastik"], c: 1, hint: "Gas asli dari sisa organik." },
+        { q: "PHA dihasilkan secara semula jadi oleh?", a: ["Pasir", "Bakteria", "Cahaya", "Logam"], c: 1, hint: "Mikroorganisma kecil." },
+        { q: "Kelebihan utama bioplastik PHA ialah?", a: ["Sangat keras", "Biodegradasi total", "Murah", "Lutsinar"], c: 1, hint: "Boleh reput secara semula jadi." },
+        { q: "Sistem solar berasaskan kesan apa?", a: ["Magnet", "Fotovoltaik", "Kinetik", "Haba"], c: 1, hint: "Foto bermaksud cahaya." },
+        { q: "Bahan buangan Hidrogen Hijau ialah?", a: ["Asap", "Wap air", "Gas", "Debu"], c: 1, hint: "H2O meow!" },
+        { q: "Proses belah molekul air dipanggil?", a: ["Elektrolisis", "Kondensasi", "Radiasi", "Peleburan"], c: 0, hint: "Guna elektrik (elektro)." },
+        { q: "Bahan utama sel solar ialah?", a: ["Besi", "Silikon", "Getah", "Plastik"], c: 1, hint: "Bahan semikonduktor." },
+        { q: "Kincir angin guna tenaga apa?", a: ["Potensi", "Kinetik", "Nuklear", "Haba"], c: 1, hint: "Tenaga pergerakan." },
+        { q: "Konsep 'Cradle-to-Cradle' merujuk kepada?", a: ["Ekonomi Kitaran", "Ekonomi Linear", "Pasaran Saham", "Sistem Barter"], c: 0, hint: "Kitaran hayat bahan mentah." },
+        { q: "Kitar semula aluminium jimat tenaga sebanyak?", a: ["10%", "40%", "90%", "100%"], c: 2, hint: "Sangat efisien!" },
+        { q: "Ladang angin di laut dipanggil?", a: ["Onshore", "Offshore", "Inshore", "Deepshore"], c: 1, hint: "Di kawasan perairan." },
+        { q: "PHA disimpan dalam sel bakteria sebagai?", a: ["Air", "Granul tenaga", "Oksigen", "Garam"], c: 1, hint: "Simpanan makanan bakteria." },
+        { q: "Metana menyumbang berapa pelepasan sisa di Malaysia?", a: ["10%", "30%", "50%", "80%"], c: 2, hint: "Separuh daripada jumlah keseluruhan." },
+        { q: "Visi 4 D.A.R.A adalah untuk?", a: ["Jual plastik", "Advokasi kelestarian", "Bina kincir", "Cipta kereta"], c: 1, hint: "Kesedaran Teknologi Hijau." }
+    ];
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+
     function startQuiz() {
-        // Shuffle bank soalan dan ambil 10 soalan sahaja
-        session = [...bank].sort(() => 0.5 - Math.random()).slice(0, 10);
-        currentQ = 0; score = 0;
-        navTo('s3');
+        // Acak semua soalan dan ambil 5 yang pertama
+        currentQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 5);
+        currentIndex = 0;
+        score = 0;
+        showTab('quiz-box');
         renderQ();
     }
 
-    function renderQ() {
-        locked = false;
-        const q = session[currentQ];
-        
-        // Reset Oyen & Bubble setiap kali soalan baru
-        document.getElementById('oyenMain').innerText = "😺";
-        document.getElementById('hintBubble').style.display = 'none';
-        
-        document.getElementById('next-btn').style.display = 'none';
-        document.getElementById('q-count').innerText = `PENILAIAN: SOALAN ${currentQ + 1} / 10`;
-        document.getElementById('q-text').innerText = q.q;
-        
-        const qImg = document.getElementById('q-img');
-        const qLabel = document.getElementById('q-img-label');
-        const qFallback = document.getElementById('q-fallback');
-        
-        qImg.style.display = 'none';
-        qLabel.style.display = 'none';
-        qFallback.style.display = 'none';
-
-        if(q.img && q.img !== "") {
-            qImg.src = q.img;
-            qImg.style.display = 'block';
-            qLabel.innerText = q.label || "VISUAL SOALAN";
-            qLabel.style.display = 'block';
-            qImg.onerror = function() {
-                this.style.display = 'none';
-                qLabel.style.display = 'none';
-                qFallback.style.display = 'flex';
-            };
-        } else {
-            qFallback.style.display = 'flex';
-        }
-
-        const box = document.getElementById('q-opts');
-        box.innerHTML = '';
-        q.a.forEach((opt, i) => {
-            const b = document.createElement('button');
-            b.style = "background:white; border:2px solid #ddd; padding:18px; border-radius:15px; text-align:left; font-weight:700; cursor:pointer;";
-            b.innerText = opt;
-            b.onclick = () => {
-                if(locked) return;
-                locked = true;
-                
-                // --- AUTO HIDE OYEN BILA JAWAB ---
-                document.getElementById('hintBubble').style.display = 'none';
-                
-                if(i === q.c) { 
-                    score++; b.style.background = "#dcfce7"; b.style.borderColor = "#22c55e"; 
-                    document.getElementById('oyenMain').innerText = "😻";
-                } else { 
-                    b.style.background = "#fef2f2"; b.style.borderColor = "#ef4444"; 
-                    document.getElementById('oyenMain').innerText = "😿";
-                }
-                document.getElementById('next-btn').style.display = 'block';
-            };
-            box.appendChild(b);
-        });
-    }
-
     function showHint() {
-        const oyen = document.getElementById('oyenMain');
-        const bubble = document.getElementById('hintBubble');
-        const intro = ["Sini aku bisik...", "Oyen rasa jawapannya...", "Psst! Dengar ni..."];
-        
-        oyen.innerText = "🧐";
-        bubble.innerText = intro[Math.floor(Math.random() * intro.length)] + "\n\n" + session[currentQ].h;
-        bubble.style.display = 'block';
-
-        // --- AUTO HIDE SELEPAS 3 SAAT ---
-        setTimeout(() => {
-            bubble.style.display = 'none';
-            if(!locked) oyen.innerText = "😺"; 
-        }, 3000); 
+        document.getElementById('hint-bubble').innerText = currentQuestions[currentIndex].hint;
     }
 
-    function nextStep() {
-        currentQ++;
-        // Pastikan bubble hilang bila tekan soalan seterusnya
-        document.getElementById('hintBubble').style.display = 'none';
-        
-        if(currentQ < 10) renderQ();
-        else {
-            document.getElementById('score-text').innerText = `${score} / 10`;
-            navTo('s4');
-            if(score >= 8) document.getElementById('oyenMain').innerText = "👑";
-            else if(score >= 5) document.getElementById('oyenMain').innerText = "😼";
-            else document.getElementById('oyenMain').innerText = "😿";
+    function renderQ() {
+        const optBox = document.getElementById('q-options');
+        const nextBtn = document.getElementById('next-btn');
+        const hintBubble = document.getElementById('hint-bubble');
+
+        if(currentIndex >= currentQuestions.length) {
+            // Skrin Tamat
+            document.getElementById('q-no').innerText = "TAHNIAH MEOW!";
+            document.getElementById('q-text').innerHTML = `Sesi tamat!<br>Skor: ${score}/5`;
+            hintBubble.innerText = score >= 4 ? "Hebat! Anda pro!" : "Boleh cuba lagi meow!";
+            
+            optBox.innerHTML = `
+                <button class="btn-next" style="margin-top:10px;" onclick="startQuiz()">ULANG KUIZ (SOALAN BARU) ➔</button>
+                <button class="btn-next" style="background:#475569; margin-top:10px;" onclick="showTab('profil')">KEMBALI KE LAMAN UTAMA 🏠</button>
+            `;
+            nextBtn.style.display = 'none';
+            return;
         }
+
+        let q = currentQuestions[currentIndex];
+        document.getElementById('q-no').innerText = `SOALAN ${currentIndex + 1} / 5`;
+        document.getElementById('q-text').innerText = q.q;
+        hintBubble.innerText = "Meow! Klik saya untuk hint!";
+        nextBtn.style.display = 'none';
+        
+        optBox.innerHTML = '';
+        q.a.forEach((opt, idx) => {
+            let d = document.createElement('div');
+            d.className = 'opt';
+            d.innerText = opt;
+            d.onclick = () => {
+                const all = optBox.querySelectorAll('.opt');
+                all.forEach(b => b.style.pointerEvents = 'none');
+                if(idx === q.c) {
+                    d.classList.add('correct');
+                    score++;
+                    hintBubble.innerText = "BETUL! Bijak meow!";
+                } else {
+                    d.classList.add('wrong');
+                    all[q.c].classList.add('correct');
+                    hintBubble.innerText = "Meow... silap tu.";
+                }
+                nextBtn.style.display = 'flex';
+                currentIndex++;
+            };
+            optBox.appendChild(d);
+        });
     }
 </script>
 </body>
 </html>
- 
