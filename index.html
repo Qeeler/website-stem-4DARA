@@ -12,62 +12,17 @@
         #overlay { position: fixed; display: none; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.6); z-index: 1500; transition: 0.4s; }
         .header { background-color: #064e3b; color: #4ade80; padding: 15px 25px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .hamburger { font-size: 24px; cursor: pointer; margin-right: 20px; padding: 5px 10px; border: 1.5px solid #4ade80; border-radius: 8px; }
-        .sidebar {height: 100%;width: 0;position: fixed;z-index: 2000;top: 0;left: 0;background-color: #022c22;overflow-x: hidden;overflow-y: auto;transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);box-shadow: 10px 0 30px rgba(0,0,0,0.5);font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
-        .sidebar a {padding: 18px 25px;text-decoration: none;font-size: 15px;font-weight: 500;color: #e2e8f0;display: flex;align-items: center;gap: 12px;transition: all 0.3s ease;border-left: 5px solid transparent;line-height: 1.2;}
-        .sidebar a:hover {color: #ffffff;background-color: rgba(255, 255, 255, 0.05);border-left: 5px solid #4ade80;padding-left: 30px;}
-/* --- BAHAGIAN HUBUNGI KAMI (PREMIUM LOOK) --- */
-
-/* 1. Tajuk "HUBUNGI KAMI" */
-.sidebar .section-label {
-    color: #4ade80 !important;   /* Hijau neon tajam */
-    font-weight: 800;
-    font-size: 11px;
-    padding: 30px 25px 12px !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: block;
-}
-
-/* 2. Container untuk Alamat & Link */
-.contact-info {
-    padding: 0 25px 30px !important;
-    font-family: 'Inter', sans-serif; /* Guna font moden */
-}
-
-/* 3. Tulisan Alamat (Bukan Link) */
-.contact-info p, .contact-info span {
-    color: #f1f5f9 !important;   /* Putih cerah, bukan biru kusam */
-    font-size: 13px;
-    line-height: 1.8;            /* Bagi ruang bernafas */
-    margin: 0 0 15px 0;
-    display: block;
-    opacity: 0.9;
-}
-
-/* 4. Link Email & No Tel (Settlekan isu warna biru kusam) */
-.contact-info a {
-    color: #4ade80 !important;   /* Link warna hijau supaya 'match' dengan tema */
-    text-decoration: none;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    transition: 0.3s ease;
-}
-
-/* 5. Bila user hover kat email/tel */
-.contact-info a:hover {
-    color: #ffffff !important;   /* Tukar putih bila hover */
-    padding-left: 5px;           /* Animate sikit */
-}
-        .sidebar .credit-box {padding: 10px 25px;color: #94a3b8;font-size: 13px;line-height: 1.8;}
-        .sidebar .closebtn {position: absolute;top: 15px;right: 25px;font-size: 28px;color: #4ade80; transition: 0.3s;font-weight: bold;}
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #064e3b; overflow-x: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+        .sidebar-content { padding: 20px 0; flex-grow: 1; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 15px; color: #cbd5e0; display: block; border-left: 5px solid transparent; }
+        .sidebar a.active { background: #14532d; color: white; border-left: 5px solid #4ade80; }
+        .sidebar .section-label { color: #4ade80; font-weight: 800; font-size: 11px; padding: 25px 25px 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar .credit-box { padding: 0 25px; color: #f1f5f9; font-size: 13px; line-height: 1.8; }
+        .sidebar-footer { padding: 20px 25px; background: #022c22; border-top: 1px solid #065f64; font-size: 11px; color: #94a3b8; }
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .main-card { background: white; border-radius: 24px; padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .content-section { display: none; animation: fadeIn 0.6s ease-out; }
         .content-section.active { display: block; }
-        .control-item { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; } .control-item:last-child { margin-bottom: 0; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .green-strip { border-left: 12px solid #15803d; padding-left: 25px; margin-bottom: 30px; }
         h1 { color: #064e3b; font-size: 2.5rem; margin: 0; }
@@ -101,21 +56,17 @@
             <b>DANISH</b> - Ketua Projek<br>
             <b>AISY</b> - Pereka Kreatif<br>
             <b>RAJA</b> - Pembantu Teknikal<br>
-            <b>AQEEL</b> - Pembangun Sistem, Terpaling Kacak
+            <b>AQEEL</b> - Pembangun Sistem
         </div>
     </div>
-<div class="section-label">HUBUNGI KAMI</div>
-
-<div class="contact-info">
-    <p>
-        <strong>SMK Bandar Tun Hussein Onn 2</strong><br>
-        Persiaran Suadamai, Bandar Tun Hussein Onn, 43200 Cheras, Selangor Darul Ehsan.
-    </p>
-    <a href="mailto:m-11995403@moe-dl.edu.my">📩 m-11995403@moe-dl.edu.my</a>
-    <a href="tel:+601115811246">📞 +6011 1581 1246</a>
-</div>
-<div class="sidebar-footer" style="padding: 20px 25px; font-size: 10px; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05);">
-    © 2026 Kumpulan 4 D.A.R.A
+    <div class="sidebar-footer">
+        <div style="color: #4ade80; font-weight: bold; margin-bottom: 8px;">HUBUNGI KAMI</div>
+        <b>SMK Bandar Tun Hussein Onn 2</b><br>
+        Persiaran Suasana, BTHO, 43200 Selangor.<br><br>
+        📧 m-11995403@moe-dl.edu.my<br>
+        📞 +6011 1581 1246<br><br>
+        <span style="opacity: 0.6;">© 2026 Kumpulan 4 D.A.R.A</span>
+    </div>
 </div>
 
 <div class="header">
@@ -176,61 +127,11 @@
             <div id="q-options"></div>
             <button id="next-btn" class="btn-next" onclick="renderQ()" style="display:none; background:#0f172a;">TERUSKAN ➔</button>
         </div>
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
-    <div class="sidebar-content">
-        <div class="section-label">Menu Utama</div>
-        <a onclick="showTab('profil')">🏠 Profil</a>
-        <a onclick="showTab('quiz')">📝 Mula Kuiz</a>
     </div>
 </div>
-<div id="volume-box" style="position:fixed; top:20px; right:20px; z-index:9999 !important; background:rgba(6,78,59,0.9); padding:15px; border-radius:12px; display:block !important; visibility:visible !important; border:1px solid #4ade80;"><div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><span style="color:white; font-size:12px;">🎵</span><input type="range" id="musicSlider" min="0" max="1" step="0.1" value="0.5" style="width:80px; cursor:pointer; accent-color:#4ade80 !important;"></div><div style="display:flex; align-items:center; gap:10px;"><span style="color:white; font-size:12px;">🔊</span><input type="range" id="sfxSlider" min="0" max="1" step="0.1" value="0.5" style="width:80px; cursor:pointer; accent-color:#4ade80 !important;"></div></div>
-</div>
-
-    <audio id="musicMain" loop><source src="main.mp3" type="audio/mpeg"></audio>
-    <audio id="musicQuiz" loop><source src="quiz.mp3" type="audio/mpeg"></audio>
-    <audio id="sfxWin"><source src="success.mp3" type="audio/mpeg"></audio>
-    <audio id="sfxLose"><source src="fail.mp3" type="audio/mpeg"></audio>
-    <audio id="sfxHover"><source src="click.mp3" type="audio/mpeg"></audio>
 
 <script>
-    const mSlider = document.getElementById('musicSlider');
-    const sSlider = document.getElementById('sfxSlider');
-    const mMain = document.getElementById('musicMain');
-    const mQuiz = document.getElementById('musicQuiz');
-    const sWin = document.getElementById('sfxWin');
-    const sLose = document.getElementById('sfxLose');
-    const sHover = document.getElementById('sfxHover');
-
-    let currentAudio = null;
-    let currentQuestions = [];
-    let currentIndex = 0;
-    let score = 0;
-
-    function updateAllVolumes() {
-        const mv = mSlider.value; 
-        const sv = sSlider.value; 
-
-        if(mMain) mMain.volume = mv;
-        if(mQuiz) mQuiz.volume = mv;
-        if(sWin) sWin.volume = mv;   
-        if(sLose) sLose.volume = mv; 
-        if(sHover) sHover.volume = sv; 
-    }
-
-    function crossFade(newAudio) {
-        if (!newAudio || currentAudio === newAudio) return;
-        
-        // Matikan semua lagu latar yang tengah main
-        [mMain, mQuiz].forEach(m => { if(m) m.pause(); });
-
-        currentAudio = newAudio;
-        currentAudio.currentTime = 0;
-        currentAudio.volume = mSlider.value;
-        currentAudio.play().catch(e => console.log("Perlu klik skrin dahulu"));
-    }
-
     function openNav() { 
         document.getElementById("mySidebar").style.width = "320px"; 
         document.getElementById("overlay").style.display = "block"; 
@@ -241,25 +142,13 @@
     }
 
     function showTab(tabId) {
-        // Tukar paparan tab
-        window.scrollTo(0, 0);
-
         document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        const target = document.getElementById(tabId);
-        if(target) target.classList.add('active');
-
-        // Reset bunyi menang/kalah kalau ada
-        [sWin, sLose].forEach(s => { if(s) { s.pause(); s.currentTime = 0; } });
-
-        // LOGIK TUKAR LAGU:
-        if (tabId === 'quiz-box') {
-            crossFade(mQuiz);
-        } else {
-            crossFade(mMain);
-        }
-
-        closeNav();
-        setupSFX(); // Refresh bunyi hover pada butang baru
+        document.getElementById(tabId).classList.add('active');
+        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+        if (tabId === 'profil') document.getElementById('nav-profil').classList.add('active');
+        else document.getElementById('nav-modul').classList.add('active');
+        closeNav(); 
+        window.scrollTo(0,0);
     }
 
     // DATABASE SOALAN (20 SOALAN)
@@ -286,12 +175,15 @@
         { q: "Visi 4 D.A.R.A adalah untuk?", a: ["Jual plastik", "Advokasi kelestarian", "Bina kincir", "Cipta kereta"], c: 1, hint: "Kesedaran Teknologi Hijau." }
     ];
 
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+
     function startQuiz() {
         // Acak semua soalan dan ambil 5 yang pertama
         currentQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 5);
         currentIndex = 0;
         score = 0;
-        currentAudio = null;
         showTab('quiz-box');
         renderQ();
     }
@@ -300,43 +192,25 @@
         document.getElementById('hint-bubble').innerText = currentQuestions[currentIndex].hint;
     }
 
-function renderQ() {
-    const optBox = document.getElementById('q-options');
-    const nextBtn = document.getElementById('next-btn');
-    const hintBubble = document.getElementById('hint-bubble');
+    function renderQ() {
+        const optBox = document.getElementById('q-options');
+        const nextBtn = document.getElementById('next-btn');
+        const hintBubble = document.getElementById('hint-bubble');
 
-    if(currentIndex >= currentQuestions.length) {
-        // --- 1. BERHENTIKAN MUZIK KUIZ ---
-        if(mQuiz) mQuiz.pause();
-
-        // --- 2. LOGIK BUNYI LULUS / GAGAL ---
-        if(score >= 4) {
-            if(sWin) { 
-                sWin.currentTime = 0; 
-                sWin.play(); 
-            }
-            hintBubble.innerText = "Hebat! Anda pro!";
-        } else {
-            if(sLose) { 
-                sLose.currentTime = 0; 
-                sLose.play(); 
-            }
-            hintBubble.innerText = "Boleh cuba lagi meow!";
+        if(currentIndex >= currentQuestions.length) {
+            // Skrin Tamat
+            document.getElementById('q-no').innerText = "TAHNIAH MEOW!";
+            document.getElementById('q-text').innerHTML = `Sesi tamat!<br>Skor: ${score}/5`;
+            hintBubble.innerText = score >= 4 ? "Hebat! Anda pro!" : "Boleh cuba lagi meow!";
+            
+            optBox.innerHTML = `
+                <button class="btn-next" style="margin-top:10px;" onclick="startQuiz()">ULANG KUIZ (SOALAN BARU) ➔</button>
+                <button class="btn-next" style="background:#475569; margin-top:10px;" onclick="showTab('profil')">KEMBALI KE LAMAN UTAMA 🏠</button>
+            `;
+            nextBtn.style.display = 'none';
+            return;
         }
 
-        // --- 3. PAPARAN SKRIN TAMAT ---
-        document.getElementById('q-no').innerText = "TAHNIAH MEOW!";
-        document.getElementById('q-text').innerHTML = `Sesi tamat!<br>Skor: ${score}/5`;
-        
-        optBox.innerHTML = `
-            <button class="btn-next" style="margin-top:10px;" onclick="startQuiz()">ULANG KUIZ ➔</button>
-            <button class="btn-next" style="background:#475569; margin-top:10px;" onclick="location.reload()">KEMBALI KE LAMAN UTAMA 🏠</button>
-        `;
-        nextBtn.style.display = 'none';
-        setupSFX();
-        return;
-    }
-    
         let q = currentQuestions[currentIndex];
         document.getElementById('q-no').innerText = `SOALAN ${currentIndex + 1} / 5`;
         document.getElementById('q-text').innerText = q.q;
@@ -362,37 +236,10 @@ function renderQ() {
                 }
                 nextBtn.style.display = 'flex';
                 currentIndex++;
-                setupSFX();
             };
             optBox.appendChild(d);
         });
-        setupSFX();
-        return;
     }
-    function setupSFX() {
-        document.querySelectorAll('button, .opt, .sidebar a, .hamburger').forEach(el => {
-            el.onmouseenter = () => { 
-                if(sHover) { sHover.currentTime = 0; sHover.play().catch(()=>{}); } 
-            };
-        });
-    }
-
-// Suis untuk slider
-document.getElementById('musicSlider').addEventListener('input', updateAllVolumes);
-document.getElementById('sfxSlider').addEventListener('input', updateAllVolumes);
-
-    document.addEventListener('click', () => {
-        if(!currentAudio) {
-            crossFade(mMain);
-            updateAllVolumes();
-        }
-    }, { once: true });
-
-    window.onload = () => {
-        updateAllVolumes();
-        setupSFX();
-    };
-
 </script>
 </body>
 </html>
